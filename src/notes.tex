@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{enumitem}
 
 \newtheorem{example}{Exemplo}
 \newtheorem{remark}{Observação}
@@ -21,6 +22,10 @@
 
 \begin{document}
 
+
+%
+%
+%
 \chapter{Introdução}
 
 As fases na resolução de problemas em matemática aplicada e computacional que surgem nas mais diversas áreas do conhecimento, de modo geral, podem ser representadas da seguinte maneira:
@@ -35,15 +40,20 @@ A primeira fase consiste basicamente em definir corretamente o problema a ser so
 
 A análise dos resultados tem por finalidade verificar os resultados obtidos na resolução do problema. Se o resultado for satisfatório aceitamos a solução do problema, caso contrário, deve-se procurar outros métodos ou refazer a modelagem matemática.
 
+%
+%
+%
 \chapter{Principais erros na resolução de um problema}
 
 Na resolução de um problema os erros podem surgir em cada fase. A seguir apresentamos os principais:
 
-\begin{enumerate}
-	\item \textbf{Erros na fase do problema:} Não definir corretamente o problema é um erro grave que pode levar a falsos resultados.
-	
-	\item \textbf{Erros na modelagem matemática:} O modelo matemático para um problema real deve representar o fenômeno que ocorre no mundo físico, porém, nem sempre é fácil. Normalmente são necessárias simplificações no modelo físico para se obter um modelo matemático (tratável) que fornecerá uma solução para o problema. Essas simplificações se constituem em fonte de erros, o que pode acarretar na necessidade de reformular o modelo matemático adotado.
-\end{enumerate}
+\section{Erros na fase do problema}
+
+Não definir corretamente o problema é um erro grave que pode levar a falsos resultados.
+
+\section{Erros na modelagem matemática}
+
+O modelo matemático para um problema real deve representar o fenômeno que ocorre no mundo físico, porém, nem sempre é fácil. Normalmente são necessárias simplificações no modelo físico para se obter um modelo matemático (tratável) que fornecerá uma solução para o problema. Essas simplificações se constituem em fonte de erros, o que pode acarretar na necessidade de reformular o modelo matemático adotado.
 
 \begin{example}
 	Um matemático quer determinar a altura de um edificio dispondo de uma esfera de metal, um cronômetro e a equação $s=s_0+v_0 t+ \frac{1}{2}at^2$. Para isso, ele sobe no topo do edificio e solta a esfera de metal anotando o tempo até a mesma tocar o solo, ou seja, 3 segundos.
@@ -67,5 +77,47 @@ Na resolução de um problema os erros podem surgir em cada fase. A seguir apres
 \begin{remark}
 	Durante a aula, foi proposta uma atividade semelhante em que, utilizando o cronômetro dos celulares e uma bolinha, em duplas, realizando procedimento parecido com o do exemplo, os alunos deveriam estimar a altura da porta da sala de aula.
 \end{remark}
+
+\section{Erros na resolução}
+
+Esses erros podem ocorrer na representação de números, na conversão da base e também nos arredondamentos.
+
+Na representação de números, considere o cálculo da área de uma circunferência de raio 100 m, onde utilizaremos os seguintes valores para $\pi$:
+\begin{enumerate}[label=\Alph*]
+	\item $\pi=3,14\Longrightarrow A=31.400 m^2$.
+	\item $\pi=3,1416\Longrightarrow A=31.416 m^2$.
+	\item $\pi=3,141592654\Longrightarrow A=31.415,93 m^2$.
+\end{enumerate}
+
+A representação de um número depende da base escolhida ou disponível na maquina em uso (computador, calculadora) e do número máximo de dígitos usados na sua representação.
+
+O número $\pi$ não pode ser representado, através de um número finito de dígitos decimais. Neste exemplo utilizou-se três valores para $\pi$, sendo que para cada valor foi encontrado um resultado diferente para a área da circunferência. O erro neste exemplo depende exclusivamente da aproximação escolhida para $\pi$. Qualquer que seja a circunferência, a sua área nunca será obtida exatamente, uma vez que $\pi$ é um número irracional.
+
+Qualquer cálculo que envolva números que não podem ser representados através de um número finito de dígitos não fornecerá como resultado um valor exato. Quanto maior o número de dígitos utilizados, maior será a precisão obtida. Por isso, a melhor aproximação, neste exemplo, para o valor da área da circunferência é quando $\pi=3,141592654$ (caso (c)).
+
+Na conversão de base pode ocorrer que um número tenha representação finita em uma base e não finita em outra base. Por exemplo, o número 0,6 na base decimal é representado pelo número 0,10011001$\dots$ na base 2, isto é:
+$$
+	(0,6)_{10}=(0,10011001\dots)_{2}
+$$
+
+É usual representar e realizar operações com números na base 10 (decimal), mas um número real pode ser representado em qualquer base. Um computador, normalmente, opera no sistema binário, ou seja, base 2.
+
+Em relação ao arredondamento, observe que na interação entre usuário e o computador que opera na base binária, ocorre o seguinte: os dados de entrada são enviados ao computador pelo usuário no sistema decimal e toda essa informação é convertida para a base binária pelo computador e as operações são efetuadas nessa base. Os resultados obtidos no sistema binário são convertidos para o sistema decimal e transmitidos ao usuário.
+
+Todo esse processo de conversão de base pode se constituir em uma fonte de erros de arredondamentos que pode afetar os resultados finais dos cálculos na resolução de um problema.
+
+\begin{example}
+	Considere os seguintes valores $x_1=0,003815$ e $x_2=1.234.567.890$ e, as operações $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Temos os seguintes resultados:
+
+	\begin{itemize}
+		\item \textbf{Calculadora científica (10 digitos):}\hfill
+		$$(x_1+x_2)-x_2=(0,003815+1.234.567.890)-1.234.567.890=$$
+		$$=1.234.567.890-1.234.567.890=0\text{,}$$
+		e, no segundo caso,
+		$$x_1+(x_2-x_2)=0,003815+(1.234.567.890-1.234.567.890)=$$
+		$$=0,003815+0=0,003815\text{.}$$
+	\end{itemize}
+	\todo{Complementar o exemplo falando sobre o uso de cálculadoras de celular, linguagens de programação (tamanho máximo de números), etc.}
+\end{example}
 
 \end{document}
