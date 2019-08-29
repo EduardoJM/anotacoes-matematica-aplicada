@@ -1,0 +1,91 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\newcount\total
+\newcount\lasttotal
+\newcount\targetbase
+
+\def\basetenconversiontable#1#2{%
+    \begin{tikzpicture}[every node/.style={minimum width=1cm, minimum height=0.5cm}, x=1cm,y=0.5cm]
+    %
+    \total=#1%
+    \targetbase=#2
+    \def\newnumber{}
+    %
+    \pgfmathloop
+    \ifnum\total<1
+    \else
+        %
+        \ifnum\pgfmathcounter>1
+            \node at (\pgfmathcounter, -\pgfmathcounter+1) (tmp) {\the\targetbase};
+            \draw (tmp.north west) |- (tmp.south east);
+            %
+            %\node at (\pgfmathcounter-1, -\pgfmathcounter) (tmp) {\pgfmathparse{int(\total*\targetbase)}\pgfmathresult};
+            %\draw (tmp.south west) -- (tmp.south east);
+            %
+            \pgfmathparse{int(\lasttotal-\total*\targetbase)}%
+            \let\digit=\pgfmathresult
+            \node at (\pgfmathcounter-1, -\pgfmathcounter) [text=red] {\digit};
+            \edef\newnumber{\digit\newnumber}
+        \fi
+        %
+        \ifnum\total<\targetbase
+                \edef\newnumber{\the\total\newnumber}
+            \node at (\pgfmathcounter, -\pgfmathcounter) [text=red]  {\the\total};
+        \else
+            \node at (\pgfmathcounter, -\pgfmathcounter) {\the\total};
+        \fi
+        \lasttotal=\total
+        \divide\total by\targetbase
+    \repeatpgfmathloop    
+    \draw [->] (\pgfmathcounter-1,-\pgfmathcounter) -- ++(-0.5,0); 
+    %\node [anchor=west] at (1, -\pgfmathcounter-2) {$#1=\newnumber_{\the\targetbase}$};
+    \end{tikzpicture}   
+}
+
+\def\basetenconversiontabledemo{
+	\begin{tikzpicture}[every node/.style={minimum width=1cm, minimum height=0.5cm}, x=1cm, y=0.5cm]
+		\node at (1, -1) {$N$};
+	
+		\node at (2, -1) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (1, -2) [text=red] {$r_1$};
+
+		\node at (2, -2) {$q_1$};
+		
+		\node at (3, -2) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (2, -3) [text=red] {$r_2$};
+		\node at (3, -3) {$q_2$};
+		
+		\node at (4, -3) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (3, -4) [text=red] {$r_3$};
+		\node at (4, -4) {$q_3$};
+		
+		\node at (5, -5) {$\ddots$};
+		\node at (6, -6) {$q_{n-1}$};
+		\node at (7, -6) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (6, -7) [text=red] {$r_n$};
+		\node at (7, -7) [text=red] {1};
+		
+		\draw [->] (7, -8) -- ++(-1,0);
+		\draw [->] (6, -8) -- (1, -3);
+	\end{tikzpicture}
+}
+
+\begin{document}
+
+\basetenconversiontabledemo
+%\\
+%\basetenconversiontable{637}{2}
+
+%\begin{tabular}{c}
+%\basetenconversiontable{478}{7} \\ 
+%\basetenconversiontable{1362}{5} \\
+%\basetenconversiontable{365}{3} \\
+%\basetenconversiontable{637}{2}
+%\end{tabular}
+
+\end{document}

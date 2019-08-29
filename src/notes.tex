@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{enumitem}
+\usepackage{tikz}
 
 \newtheorem{example}{Exemplo}
 \newtheorem{remark}{Observação}
@@ -15,6 +16,80 @@
 \usepackage[left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
 \title{Matemática Aplicada e Computacional}
 \author{Eduardo José de Oliveira}
+
+\newcount\total
+\newcount\lasttotal
+\newcount\targetbase
+
+\def\basetenconversiontable#1#2{%
+    \begin{tikzpicture}[every node/.style={minimum width=1cm, minimum height=0.5cm}, x=1cm,y=0.5cm]
+    %
+    \total=#1%
+    \targetbase=#2
+    \def\newnumber{}
+    %
+    \pgfmathloop
+    \ifnum\total<1
+    \else
+        %
+        \ifnum\pgfmathcounter>1
+            \node at (\pgfmathcounter, -\pgfmathcounter+1) (tmp) {\the\targetbase};
+            \draw (tmp.north west) |- (tmp.south east);
+            %
+            %\node at (\pgfmathcounter-1, -\pgfmathcounter) (tmp) {\pgfmathparse{int(\total*\targetbase)}\pgfmathresult};
+            %\draw (tmp.south west) -- (tmp.south east);
+            %
+            \pgfmathparse{int(\lasttotal-\total*\targetbase)}%
+            \let\digit=\pgfmathresult
+            \node at (\pgfmathcounter-1, -\pgfmathcounter) [text=red] {\digit};
+            \edef\newnumber{\digit\newnumber}
+        \fi
+        %
+        \ifnum\total<\targetbase
+                \edef\newnumber{\the\total\newnumber}
+            \node at (\pgfmathcounter, -\pgfmathcounter) [text=red]  {\the\total};
+        \else
+            \node at (\pgfmathcounter, -\pgfmathcounter) {\the\total};
+        \fi
+        \lasttotal=\total
+        \divide\total by\targetbase
+    \repeatpgfmathloop    
+    \draw [->] (\pgfmathcounter-1,-\pgfmathcounter) -- ++(-0.5,0); 
+    %\node [anchor=west] at (1, -\pgfmathcounter-2) {$#1=\newnumber_{\the\targetbase}$};
+    \end{tikzpicture}   
+}
+
+\def\basetenconversiontabledemo{
+	\begin{tikzpicture}[every node/.style={minimum width=1cm, minimum height=0.5cm}, x=1cm, y=0.5cm]
+		\node at (1, -1) {$N$};
+	
+		\node at (2, -1) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (1, -2) [text=red] {$r_1$};
+
+		\node at (2, -2) {$q_1$};
+		
+		\node at (3, -2) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (2, -3) [text=red] {$r_2$};
+		\node at (3, -3) {$q_2$};
+		
+		\node at (4, -3) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (3, -4) [text=red] {$r_3$};
+		\node at (4, -4) {$q_3$};
+		
+		\node at (5, -5) {$\ddots$};
+		\node at (6, -6) {$q_{n-1}$};
+		\node at (7, -6) (tmp) {2};
+		\draw (tmp.north west) |- (tmp.south east);
+		\node at (6, -7) [text=red] {$r_n$};
+		\node at (7, -7) [text=red] {1};
+		
+		\draw [->] (7, -8) -- ++(-1,0);
+		\draw [->] (6, -8) -- (1, -3);
+	\end{tikzpicture}
+}
 
 \newcommand{\todo}[1]{
 	{\color{red}#1}
@@ -118,6 +193,118 @@ Todo esse processo de conversão de base pode se constituir em uma fonte de erro
 		$$=0,003815+0=0,003815\text{.}$$
 	\end{itemize}
 	\todo{Complementar o exemplo falando sobre o uso de cálculadoras de celular, linguagens de programação (tamanho máximo de números), etc.}
+\end{example}
+
+\chapter{Representação de Números}
+
+Em geral, um número real $x$ na base $\beta$ é representado por
+$$
+	x=(a_{m}a_{m-1}\cdots a_2 a_1 a_0, b_1 b_2\cdots b_k)_{\beta}
+$$
+$$
+	x=a_{m}\cdot \beta^{m}
+	+
+	a_{m-1} \cdot \beta^{m-1}
+	+ \cdots +
+	a_1 \cdot \beta^1
+	+
+	a_0 \cdot \beta^0
+	+
+	b_1 \cdot \beta^{-1}
+	+
+	b_2 \cdot \beta^{-2}
+	+ \cdots +
+	b_k \cdot \beta^{-k}
+	\text{,}
+$$
+onde $0\leqslant a_i < \beta$, $i=0$, $1$, $2$, $\dots$, $m$ e $0\leqslant b_j < \beta$, $j=1$, $2$, $\dots$, $k$.
+
+De fato, no sistema decimal temos que $\beta=10$ e $a_i$ e $b_j$ elementos do conjunto $A=\{$0, 1, 2, 3, 4, 5, 6, 7, 8, 9$\}$, no binário temos que $\beta=2$ e $a_i$ e $b_j$ são elementos do conjunto $A=\{$0, 1$\}$.
+
+\begin{example}
+	Escreva a representação dos seguintes números:
+	\begin{enumerate}
+  		% exemplo 1
+	    \item $x=(1984)_{10}$ = $1\cdot 10^3 + 9\cdot 10^2 + 8\cdot 10^1 + 4\cdot 10^0$.
+    	% exemplo 2
+	    \item $x=(15,47)_{10}$ = $1\cdot 10^1 + 5\cdot 10^0 + 4\cdot 10^{-1} + 7\cdot 10^{-2}$.
+	    % exemplo 3
+    	\item $x=(0,362)_{10}$ = $0\cdot 10^0 + 3\cdot 10^{-1} + 6\cdot 10^{-2} + 2\cdot 10^{-3}$.
+	    % exemplo 4
+    	\item $x=(1011)_{2}$ = $1\cdot 2^3 + 0\cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0$.
+	    % exemplo 5
+    	\item $x=(11,01)_{2}$ = $1\cdot 2^1 + 1\cdot 2^0 + 0\cdot 2^{-1} + 1\cdot 2^{-2}$.
+	    % exemplo 6
+    	\item $x=(0,110)_{2}$ = $0\cdot 2^0 + 1\cdot 2^{-1} + 1\cdot 2^{-2} + 0\cdot 2^{-3}$.
+	    % exemplo 7
+    	\item $x=(1572)_{8}$ = $1\cdot 8^3 + 5\cdot 8^2 + 7\cdot 8^1 + 2\cdot 8^0$.
+	    % exemplo 8
+    	\item $x=(0,1)_{4}$ = $0\cdot 4^0 + 1 \cdot 4^{-1}$.
+	\end{enumerate}
+\end{example}
+
+\section{Conversão de Bases}
+
+\subsection{Binário para Decimal}
+
+Para converter da base binária para a base decimal, basta multiplicar o dígito binário por uma potência $\beta=2$ adequada, ou seja, resolver a expressão da representação numérica na base decimal.
+
+\begin{example}
+    Converta os seguintes números para a base decimal:
+    \begin{enumerate}
+        % exemplo a
+        \item $(101101)_{2}$ = $1\cdot 2^5 + 0\cdot 2^4 + 1 \cdot 2^3 + 1 \cdot 2^2 + 0\cdot 2^1 + 1\cdot 2^0$, ou seja, $(101101)_{2} = 32 + 0 + 8 + 4 + 0 + 1 = 45$. Portanto, $(101101)_{2}=(45)_{10}$.
+        % exemplo b
+        \item $(1011,110)_{2}$ = $1\cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 + 1 \cdot 2^{-1} + 1\cdot 2^{-2} + 0 \cdot 2^{-3}$, donde $(1011,110)_{2}=(11,75)_{10}$.
+        % exemplo c
+        \item $(1251)_{8}$ = $1\cdot 8^3 + 2 \cdot 8^2 + 5\cdot 8^1 + 1\cdot 8^0 = (681)_{10}$.
+        % exemplo d
+        \item $(0,1)_{4}$ = $0\cdot 4^0 + 1 \cdot 4^{-1}=(0,25)_{10}$.
+    \end{enumerate}
+\end{example}
+
+\subsection{Decimal para Binário}
+
+Para a conversão de um número na base 10 para a base 2, utiliza-se um processo para a parte inteira e um outro diferente para a parte fracionária.
+
+Para converter a parte inteira, utiliza-se o processo das divisões sucessivas, que consiste em dividir a parte inteira do número por 2. A seguir, divide-se por 2 o quociente encontrado e assim o processo é repetido até que o último quociente seja igual a 1. 
+
+O número binário será formado pela concatenação dos restos das divisões lidos em sentido inverso a que foram obtidos com o número 1 (último quociente) sendo o primeiro digito desse número, isto é:
+
+\begin{figure}[h]
+	\centering
+	\basetenconversiontabledemo
+\end{figure}
+
+Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
+
+\begin{example}
+	Converta os seguintes números para binário
+	\begin{enumerate}
+	    \item $(17)_{10}$.\hfill
+	    	\begin{figure}[h]
+	    		\centering
+		    	\basetenconversiontable{17}{2}
+	    	\end{figure}
+	    	
+	    	Logo, $(17)_{10}=(10001)_{2}$.
+	    	\newpage
+	    	
+	    \item $(26)_{10}$.\hfill
+	    	\begin{figure}[h]
+	    		\centering
+	    		\basetenconversiontable{26}{2}
+	    	\end{figure}
+	    	
+	    	Logo, $(26)_{10}=(11010)_{2}$.
+    	\item $(100)_{10}$.\hfill
+    		\begin{figure}[h]
+    			\centering
+    			\basetenconversiontable{100}{2}
+    		\end{figure}
+    		
+    		Logo, $(100)_{10}=(1100100)_{2}$.
+	\end{enumerate}
 \end{example}
 
 \end{document}
