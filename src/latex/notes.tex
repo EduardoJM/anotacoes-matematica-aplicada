@@ -307,4 +307,60 @@ Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
 	\end{enumerate}
 \end{example}
 
+Para converter a parte fracionária de um número na base 10 para a base 2, utiliza-se o processo das multiplicações sucessivas. Multiplica-se a parte fracionária por 2, deste resultado, a parte inteira será o primeiro dígito (após a vírgula) do número binário e a parte fracionária será novamente multiplicada por 2. Desse resultado, a parte inteira será o segundo dígito do número binário e a parte fracionada será multiplicada novamente por 2. Repete-se esse processo até que a parte fracionada do último produto seja igual a zero, no caso do número ter representação finita.
+
+\begin{example}
+    Converta os números a seguir para a base binária.
+    \begin{enumerate}
+        \item $(0,125)_{10}$. Como $0,125\cdot 2 = 0,25$, o primeiro dígito é 0. Ainda, $0,25\cdot 2=0,5$, logo, o segundo dígito é 0. $0,5\cdot 2=1$, donde o terceiro dígito é $1$. Logo, $(0,125)_{10}=(0,001)_{2}$.
+        
+        \item $(0,185)_{10}$. Como $0,185\cdot 2=0,37$, o primeiro dígito é 0. Ainda, $0,37\cdot 2=0,74$, o segundo dígito é 0. $0,74\cdot 2=1,48$, donde o terceiro dígito é 1. $0,48\cdot 2=0,96$, donde o quarto dígito é 0. $0,96\cdot 2=1,92$, onde o quinto dígito é 1. $0,92\cdot 2=1,84$, donde o sexto dígito é $1$. $0,84\cdot 2=1,68$, então o setimo dígito é 1. Como a parte fracionária irá sempre se reptir, sua representação binária é infinita, então $(0,185)_{10}=(0010111\dots)_{2}$.
+
+        \item $(13,25)_{10}$ \todo{fazer a resolução}
+
+        \item $(3,8)_{10}$ \todo{fazer a resolução}
+    \end{enumerate}
+\end{example}
+
+\section{Aritmética de Ponto Flutuante}
+
+As maquinas, cmo computadores e calculadoras, utilizam uma quantidade fixa de dígitos para representar um número real no sistema denominado de aritmética de ponto flutuante. Um número real na base $\beta$ em aritmética de ponto flutuante de $t$ dígitos, tem forma geral
+$$
+    \pm
+    0.d_{1}d_{2}d_{3}\cdots d_{t}\cdot \beta ^{e}
+    \text{,}
+$$
+onde $0 \leqslant d_i < \beta$, $i=1$, 2, $\dots$, $t$. Ainda, $t$ é o número de dígitos significativos, $\beta$ é a base em que a maquina opera e $e$ é o expoente no intervalo $[m, M]$, com $m$ e $M \in \mathbb{Z}$. $d_1$, $d_2$, $d_3$, $\dots$, $d_t$ são chamados de mantissa.
+
+Em geral, $m=-M$. Se $d_1\neq 0$, caracteriza o sistema em ponto finalmente normalizado.
+
+\begin{example}
+    Represente os números a seguir num sistema de aritmética de ponto flutuante (normalizado).
+    \begin{enumerate}
+    	\item $(5720)_{10}$ = $0,5720\cdot 10^4$.
+	    \item $(90621)_{10}$ = $0,90621\cdot 10^5$.
+    	\item $(51,734)_{10}$ = $0,51734\cdot 10^2$.
+	    \item $(0,00913)_{10}$ = $0,913\cdot 10^{-2}$.
+    	\item $(-0,0001)_{10}$ = $-0,1\cdot 10^{-3}$.
+	    \item $(101101)_{2}$ = $0,101101\cdot 2^{6}$ e, transformando 6 em binário, tem-se $0,101101\cdot 2^{110}$.
+    	\item $(110,101)_{2}$ = $0,110101\cdot 2^3$ e, transformando 3 em binário, tem-se $0,110101\cdot 2^{11}$.
+	    \item $(0,01101)_{2}$ = $0,1101\cdot 2^{-1}$.
+    	\item $(-0,0001001)_{2}$ = $-0,1001\cdot 2^{-3}$ e, convertendo 3 para a base binária, tem-se $-0,1001\cdot 2^{-11}$.
+	\end{enumerate}
+\end{example}
+
+Um número não poderá ser representado na maquina com sistema de aritmética do ponto flutuante se o expoente $e$ estiver fora do intervalo $[m, M]$. A maquina acusará o erro de \textit{underflow} se $e < m$ e de \textit{overflow} se $e>M$.
+
+\begin{example}
+    Considere uma maquina que opera no sistema de aritmetica de ponto flutuante com $\beta=10$, $t=3$ e $e\in [-2, 2]$. Represente neste sistema os seguintes números decimais.
+    \begin{enumerate}
+        \item $0,35 = $
+        \item $-5,172 = $
+        \item $0,0123 = $
+        \item $5391,3 = $
+        \item $0,0003 = $
+    \end{enumerate}
+\end{example}
+\todo{Resolver}
+
 \end{document}
