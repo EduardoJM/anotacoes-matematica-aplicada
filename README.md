@@ -12,18 +12,17 @@ Foram utilizados os seguintes softwares:
 - **InkScape** como aplicativo para desenhos vetoriais.
 
 # Estrutura de pastas
-Na pasta `src/` e em suas subpastas estão localizados todos os arquivos LaTeX do desenvolvimento do texto.
 
-Em `src/figuras/` estão localizadas as imagens (em sua maioria desenhadas com o software livre **InkScape**) utilizadas no texto.
+Na pasta `src/latex` e em suas subpastas estão localizados todos os arquivos LaTeX do desenvolvimento do texto. Em `src/latex/figuras/` estão localizadas as imagens (em sua maioria desenhadas com o software livre **InkScape**) utilizadas no texto.
+
+Na pasta `src/r` estão disponíveis arquivos da **Linguagem R** criados nas aulas no laboratório de informática.
 
 # Observações
-Há algumas observações referentes ao texto em LaTeX disponível na pasta `src/` e em suas subpastas:
+Há algumas observações referentes ao texto em LaTeX disponível na pasta `src/latex` e em suas subpastas:
 
 1 - Há um comando, definido no preâmbulo do arquivo `notes.tex`, chamado de `\todo{}` utilizado para fazer marcações de vermelho no texto, chamando a atenção para coisas que precisam ser feitas:
 ```latex
-\newcommand{\todo}[1]{
-	{\color{red}#1}
-}
+\newcommand{\todo}[1]{{\color{red}#1}}
 ```
 sendo seu uso da forma:
 ```latex
