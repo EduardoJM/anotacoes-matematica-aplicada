@@ -394,4 +394,17 @@ $$F(\beta, t, m, M)\text{.}$$
     São os números $\pm 0.100\cdot 2^e$, $\pm 0.110\cdot 2^e$, $\pm 0.101\cdot 2^e$, $\pm 0.111 \cdot 2^e$, onde $e \in [-1, 2]$. Como temos 4 possibilidades para $e$, são 32 números nesse formato, extendendo ao zero, 33.
 \end{example}
 
+\begin{remark}
+    Sabemos que os números reais podem ser representados por uma reta contínua. Entretanto, em ponto flutuante podemos representar apenas pontos discretos na reta real.
+\end{remark}
+
+\begin{example}
+    Considerando, ainda, o sistema do exemplo anterior $F(2, 3, -1, 2)$, represente os seguintes números:
+    \begin{enumerate}
+        \item $(0,38)_{10} = (0,0110110\dots)_2=0.110\cdot 2^{-1}$.
+        \item $(0,375)_{10} = (0.110)_2 = 0.110\cdot 2^{-1}$.
+        \item $(5,3)_{10} = (101,01001\dots)_2 = 0.101\cdot 2^{11}$. Mas como o expoente é limitado entre -1 e 2 (decimais), o número seria um caso de overflow.
+    \end{enumerate}
+\end{example}
+
 \end{document}
