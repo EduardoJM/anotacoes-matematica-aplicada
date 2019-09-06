@@ -337,15 +337,15 @@ Em geral, $m=-M$. Se $d_1\neq 0$, caracteriza o sistema em ponto finalmente norm
 \begin{example}
     Represente os números a seguir num sistema de aritmética de ponto flutuante (normalizado).
     \begin{enumerate}
-    	\item $(5720)_{10}$ = $0,5720\cdot 10^4$.
-	    \item $(90621)_{10}$ = $0,90621\cdot 10^5$.
-    	\item $(51,734)_{10}$ = $0,51734\cdot 10^2$.
-	    \item $(0,00913)_{10}$ = $0,913\cdot 10^{-2}$.
-    	\item $(-0,0001)_{10}$ = $-0,1\cdot 10^{-3}$.
-	    \item $(101101)_{2}$ = $0,101101\cdot 2^{6}$ e, transformando 6 em binário, tem-se $0,101101\cdot 2^{110}$.
-    	\item $(110,101)_{2}$ = $0,110101\cdot 2^3$ e, transformando 3 em binário, tem-se $0,110101\cdot 2^{11}$.
-	    \item $(0,01101)_{2}$ = $0,1101\cdot 2^{-1}$.
-    	\item $(-0,0001001)_{2}$ = $-0,1001\cdot 2^{-3}$ e, convertendo 3 para a base binária, tem-se $-0,1001\cdot 2^{-11}$.
+    	\item $(5720)_{10}$ = $0.5720\cdot 10^4$.
+	    \item $(90621)_{10}$ = $0.90621\cdot 10^5$.
+    	\item $(51,734)_{10}$ = $0.51734\cdot 10^2$.
+	    \item $(0,00913)_{10}$ = $0.913\cdot 10^{-2}$.
+    	\item $(-0,0001)_{10}$ = $-0.1\cdot 10^{-3}$.
+	    \item $(101101)_{2}$ = $0.101101\cdot 2^{6}$ e, transformando 6 em binário, tem-se $0.101101\cdot 2^{110}$.
+    	\item $(110,101)_{2}$ = $0.110101\cdot 2^3$ e, transformando 3 em binário, tem-se $0.110101\cdot 2^{11}$.
+	    \item $(0,01101)_{2}$ = $0.1101\cdot 2^{-1}$.
+    	\item $(-0,0001001)_{2}$ = $-0.1001\cdot 2^{-3}$ e, convertendo 3 para a base binária, tem-se $-0.1001\cdot 2^{-11}$.
 	\end{enumerate}
 \end{example}
 
@@ -354,13 +354,29 @@ Um número não poderá ser representado na maquina com sistema de aritmética d
 \begin{example}
     Considere uma maquina que opera no sistema de aritmetica de ponto flutuante com $\beta=10$, $t=3$ e $e\in [-2, 2]$. Represente neste sistema os seguintes números decimais.
     \begin{enumerate}
-        \item $0,35 = $
-        \item $-5,172 = $
-        \item $0,0123 = $
-        \item $5391,3 = $
-        \item $0,0003 = $
+        \item $0,35 = 0.350\cdot 10^0$
+        \item $-5,172 = -0.517\cdot 10^1$
+        \item $0,0123 = 0.123\cdot 10^{-1}$
+        \item $5391,3 = 0.539\cdot 10^4$, como 4 não está no intervalo entre -2 e 2, $4 > 2$, a maquina acusará o erro de overflow.
+        \item $0,0003 = 0.3\cdot 10^{-3}$, como 3 não está no intervalo entre -2 e 2, $-3 < -2$, a maquina acusará o erro de underflow.
     \end{enumerate}
 \end{example}
-\todo{Resolver}
+
+\begin{remark}
+	Algumas linguagens computacionais permitem trabalhar em precisão dupla, que é o mesmo sistema de aritmética de ponto flutuante, mas com o dobro de dígitos disponíveis na mantissa. Vale lembrar que nesse caso, o tempo de execução e a memória usada aumentam significativamente.
+\end{remark}
+
+Para representar um sistema de ponto flutuante normalizado na base $\beta$, com $t$ dígitos significativos e expoente $e \in [m, M]$, usaremos a seguinte notação:
+$$F(\beta, t, m, M)\text{.}$$
+
+\begin{example}
+    Dado o sistema de aritmética de ponto flutuante $F(10, 3, -4, 4)$, represente os seguintes números decimais nesse sistema:
+    \begin{enumerate}
+        \item $1,35$ = $0.135\cdot 10^1$.
+        \item $-279,15$ = $-0.279\cdot 10^3$.
+        \item $0,024712$ = $0.247\cdot 10^{-1}$.
+        \item $10,13$ = $0.101\cdot 10^2$.
+    \end{enumerate}
+\end{example}
 
 \end{document}
