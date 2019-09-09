@@ -6,9 +6,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{color}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{matrix}
 
 \newtheorem{example}{Exemplo}
 \newtheorem{remark}{Observação}
@@ -89,6 +89,20 @@
 		\draw [->] (7, -8) -- ++(-1,0);
 		\draw [->] (6, -8) -- (1, -3);
 	\end{tikzpicture}
+}
+
+\newenvironment{tablePontoFlutuante16bits}{
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\matrix (num_rep) [matrix of nodes] 
+}{
+			\draw (num_rep-1-1.north west) rectangle (num_rep-1-16.south east);
+			\foreach \i in {1,...,16}{
+				\draw (num_rep-1-\i.north west) -- (num_rep-1-\i.south west);
+			}
+		\end{tikzpicture}
+	\end{figure}
 }
 
 \newcommand{\todo}[1]{
@@ -422,5 +436,44 @@ Para representar o sinal, utiliza-se:
     \item Para o sinal positivo utiliza-se o bit 0;
     \item para o sinal negativo, utiliza-se o bit 1.
 \end{itemize}
+
+Observando a representação na tabela a seguir, o local marcado como 1 representa o sinal da mantissa. Os lugares marcados de 2 a 11 representam a mantissa. O lugar marcado como 12 representa o sinal do expoente enquanto os lugares marcados de 13 a 16 representam o expoente.
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\matrix (num_rep) [matrix of nodes] {
+			|[fill=green!30]|1 & |[fill=blue!30]|2 & |[fill=blue!30]|3 & |[fill=blue!30]|4 & |[fill=blue!30]|5 & |[fill=blue!30]|6 & |[fill=blue!30]|7 & |[fill=blue!30]|8 & |[fill=blue!30]|9 & |[fill=blue!30]|10 & |[fill=blue!30]|11 & |[fill=green!30]|12 & |[fill=red!30]|13 & |[fill=red!30]|14 & |[fill=red!30]|15 & |[fill=red!30]|16   \\
+		};
+		\draw (num_rep-1-1.north west) rectangle (num_rep-1-16.south east);
+		\foreach \i in {1,...,16}{
+			\draw (num_rep-1-\i.north west) -- (num_rep-1-\i.south west);
+		}
+	\end{tikzpicture}
+\end{figure}
+
+\begin{example}
+	\begin{enumerate}
+		\item O número $(25)_{10} = (11001)_2 = 0.11001\cdot 2^{101}$ pode ser representado como:
+		\begin{tablePontoFlutuante16bits}
+			{
+			0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+			};
+		\end{tablePontoFlutuante16bits}
+		
+		\item O número $(-7,125)_{10}=(-111,001)_2 = -0.111001\cdot 2^{11}$ pode ser representado como:
+		\begin{tablePontoFlutuante16bits}
+			{
+			1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
+			};
+		\end{tablePontoFlutuante16bits}
+		\newpage
+		\item O número $(0,1)_{10}=(0,000110011\dots)_2 = 0.1100110011\cdot 2^{-11}$ pode ser representado como:
+		\begin{tablePontoFlutuante16bits}
+			{
+			0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\
+			};
+		\end{tablePontoFlutuante16bits}
+	\end{enumerate}
+\end{example}
 
 \end{document}
