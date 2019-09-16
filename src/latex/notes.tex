@@ -476,4 +476,74 @@ Observando a representação na tabela a seguir, o local marcado como 1 represen
 	\end{enumerate}
 \end{example}
 
+\subsection{Truncamento e Arredondamento}
+
+Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \beta ^e$. Para truncar ou arredondar esse número $x$ para um número $\overline{x}$ com $t$ casas decimais utiliza-se os seguintes procedimentos:
+\begin{itemize}
+    \item No truncamento despreza-se todos os dígitos após a $t$-ésima casa decimal ou após o dígito $d_t$, isto é: $\overline{x}=0.d_1 d_2 \dots d_t \cdot \beta^e$.
+
+    \item No arredondamento, se o dígito $d_{t+1}$ é menor que 5 despreza-se todos os dígitos posteriores a $d_t$ (truncamento). Porém, se $d_{t+1}$ é maior ou igual a 5 soma-se 1 ao dígitos $d_t$ e despreza-se os dígitos posteriores a ele.
+\end{itemize}
+
+\begin{example}
+    Utilizando truncamento e arredondamento passe os números a seguir para 4 casas decimais:
+
+    \begin{enumerate}
+        \item $x=0.77712345\cdot 10^3$.
+
+        \item $y=0.86537\cdot 10^{-5}$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Considere o sistema $F(10,3,-5,5)$. Represente os seguintes números nesse sistema utilizando truncamento e arredondamento.
+
+    \begin{enumerate}
+        \item $x=1234,56$.
+
+        \item $y=-0,00054962$.
+
+        \item $z=0,9995$.
+
+        \item $w=123456,7$.
+
+        \item $v=-0,0000001$.
+    \end{enumerate}
+\end{example}
+
+\section{Erro Absoluto e Relativo}
+
+Quando se calcula um resultado por aproximação é preciso saber como estimar ou delimitar o erro cometido na aproximação. 
+
+Em geral, apenas o valor aproximado é conhecido, e, neste caso, é impossível obter o valor exato do erro, mas pode-se estimar o erro ou até delimitá-lo obtendo-se um limite superior.
+
+Para se estimar ou delimitar o erro, recorre-se a dois conceitos: o erro absoluto e erro relativo.
+
+\subsection{Erro Absoluto}
+
+É a diferença, em módulo, entre o valor exato de um número e o seu valor aproximado, isto é:
+$$
+    |EA_x|=|x-\overline{x}|
+    \text{,}
+$$
+onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
+
+\begin{example}
+    Considere o número $9,4318$ e uma máquina que opera apenas com 3 dígitos. Qual o erro absoluto cometido por essa máquina para representar esse número?
+
+    $x=9,4318 \Longrightarrow \overline{x}=9,43$. Assim, $|EA_x|=|x-\overline{x}|$, ou seja, $|EA_x|=|9,4318-9,43|=0,0018$ ou ainda $0.180\cdot 10^{-2}$.
+\end{example}
+
+\begin{example}
+    Sabendo-se que $\pi \in (3,14; 3,15)$. Determine o erro absoluto que se pode cometer ao escolher um valor desse intervalo para $\pi$.
+
+    $|EA_{\pi}|=|\pi-\overline{\pi}|<0,01$ ou, ainda, $0.1\cdot 10^{-1}$.
+\end{example}
+
+\begin{example}
+    Seja $x$ um número representado por $\overline{x}=7,3$ de tal forma que $|EA_x|<0,1$. Determine o menor intervalo que contenha $x$.
+
+    O intervalo é dado por $(7,3-|EA_x|;7,3+|EA_x|)$ que é $(7,3-0,1;7,3+0,1)$, isto é, $(7,2;7,4)$.
+\end{example}
+
 \end{document}
