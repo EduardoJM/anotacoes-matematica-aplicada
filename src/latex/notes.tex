@@ -490,8 +490,17 @@ Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \b
 
     \begin{enumerate}
         \item $x=0.77712345\cdot 10^3$.
+        	\begin{itemize}
+			    \item Truncamento: $\overline{x}=0.7771\cdot 10^3$.
+			    \item Arredondamento: $\overline{x}=0.7771\cdot 10^3$.
+			\end{itemize}
 
         \item $y=0.86537\cdot 10^{-5}$.
+        	\begin{itemize}
+			    \item Truncamento: $\overline{y}=0.8653\cdot 10^{-5}$.
+			    \item Arredondamento: $\overline{y}=0.8654\cdot 10^{-5}$.
+			\end{itemize}
+			
     \end{enumerate}
 \end{example}
 
@@ -500,14 +509,28 @@ Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \b
 
     \begin{enumerate}
         \item $x=1234,56$.
+	        \begin{itemize}
+			    \item Truncamento: $\overline{x}=0.123\cdot 10^{4}$.
+			    \item Arredondamento: $\overline{x}=0.123\cdot 10^{4}$.
+			\end{itemize}
 
         \item $y=-0,00054962$.
+        	\begin{itemize}
+			    \item Truncamento: $\overline{y}=-0.549\cdot 10^{-3}$.
+			    \item Arredondamento: $\overline{y}=-0.550\cdot 10^{-3}$.
+			\end{itemize}
 
         \item $z=0,9995$.
+        	\begin{itemize}
+			    \item Truncamento: $\overline{z}=0.999\cdot 10^{0}$.
+			    \item Arredondamento: $\overline{z}=1.000\cdot 10^{1}$.
+			\end{itemize}
 
-        \item $w=123456,7$.
+        \item $w=123456,7$.\\
+        	$w=0.1234567\cdot 10^6$. Erro de overflow.
 
-        \item $v=-0,0000001$.
+        \item $v=-0,0000001$.\\
+        	$v=-0.1\cdot 10^{-6}$. Erro de underflow.
     \end{enumerate}
 \end{example}
 
