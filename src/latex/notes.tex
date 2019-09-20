@@ -569,4 +569,87 @@ onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
     O intervalo é dado por $(7,3-|EA_x|;7,3+|EA_x|)$ que é $(7,3-0,1;7,3+0,1)$, isto é, $(7,2;7,4)$.
 \end{example}
 
+\subsection{Erro Relativo}
+
+O erro relativo é definido como o erro absoluto dividido pelo módulo do valor aproximado de um número $x$, isto é:
+$$
+    |ER_x|
+    =\frac{|EA_x|}{|\overline{x}|}
+    =\frac{|x-\overline{x}|}{|\overline{x}|}
+    \text{,}
+$$
+onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
+
+\begin{example}
+    Considere o número 9,4318 e o seu valor aproximado 9,43. Calcule o erro relativo cometido nessa aproximação.
+    $$
+        |ER_x|
+        =\frac{|9,4318-9,43|}{|9,43|}
+        =\frac{0,0018}{9,43}
+        =0,0001908801
+        \approx 0,0002
+        \text{,}
+    $$
+    ou, em ponto flutuante, $0.2\cdot 10^{-3}$.
+\end{example}
+
+\begin{remark}
+    Dependendo da ordem de grandeza dos números envolvidos, o erro absoluto não é suficiente para descrever a precisão de um cálculo. Por esta razão, o erro relativo é amplamente empregado.
+\end{remark}
+
+\begin{example}
+    Considere o número $x$ representado por $\overline{x}=2112,9$ de tal forma que $|EA_x|<0,1$, ou seja, $x \in (2112,8; 2113)$ e o número $y$ representado por $\overline{y}=5,3$ de tal forma que $|EA_y|<0,1$, ou seja, $y\in (5,2; 5,4)$. Qual dos números $x$ ou $y$ estão representados com maior precisão?
+
+    \todo{resolver o exemplo}
+\end{example}
+
+\section{Operações Aritméticas em Ponto Flutuante}
+
+Considere uma máquina qualquer e uma série de operações aritméticas. Pelo fato do arredondamento (truncamento) ser feito após cada operação, temos, ao contrário do que é valido para números reais, que as operações aritméticas não são nem associativas e nem distributivas.
+
+\begin{example}
+    Considere um sistema com base $\beta = 10$ e $t=3$ dígitos significativos e efetue as operações a seguir utilizando arredondamento.
+
+    \begin{enumerate}
+        \item $(11,4+3,18)+5,05$ e $11,4+(3,18+5,05)$.
+        	\begin{itemize}
+        		\item O primeiro pode ser cálculado como $(11,4+3,18)+5,05=14,58+5,05$. Arredondando $14,58$ para três casas, precisamos cálcular agora $14,6+5,05=19,65$ que, novamente, arredondando para 3 casas, tem-se $19,7$.
+
+        		\item $11,4+(3,18+5,05)=11,4+8,23=19,63$, donde arredondando para três casas tem-se $19,6$.
+        	\end{itemize}
+        	
+        \item $\dfrac{(3,18\cdot 11,4)}{5,05}$ e $\left ( \dfrac{3,18}{5,05} \right) \cdot 11,4$.
+        	\begin{itemize}
+        		\item $\dfrac{(3,18\cdot 11,4}{5,05}=\dfrac{36,25}{5,05}=\dfrac{36,3}{5,05}=7,188=7,19$.
+        		
+        		\item $\left ( \dfrac{3,18}{5,05} \right )\cdot 11,4 =0,6297\cdot 11,4=0,630\cdot 11,4=7,18$.
+        	\end{itemize}
+
+        \item $3,18\cdot (5,05+11,4)$ e $(3,18\cdot 5,05)+(3,18\cdot 11,4)$.
+        	\begin{itemize}
+        		\item $3,18\cdot (5,05+11,4)=3,18\cdot 16,45=3,18\cdot 16,5=52,47=52,5$.
+        		
+        		\item $(3,18\cdot 5,05)+(3,18\cdot 11,4)=16,059+36,252=16,1+36,3=52,4$.
+        	\end{itemize}
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Utilizando o mesmo sistema do exemplo anterior, somar $\frac{1}{3}$ dez vezes consecutivas, usando arredondamento.
+    
+    \todo{Resolver exemplo}
+\end{example}
+
+\begin{example}
+	Ainda com o sistema $\beta=10$ e $t=3$, calcular o valor do polinômio $p(x)=x^3-6x^2+4x-0,1$ no ponto $5,27$ utilizando arredondamento e comparar com o valor exato.
+	
+	\todo{Resolver exemplo}
+\end{example}
+
+\begin{example}
+	Calcule o erro absoluto e relativo para os resultados do exemplo anterior.
+	
+	\todo{Resolver exemplo}
+\end{example}
+
 \end{document}
