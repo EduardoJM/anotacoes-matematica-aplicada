@@ -652,4 +652,96 @@ Considere uma máquina qualquer e uma série de operações aritméticas. Pelo f
 	\todo{Resolver exemplo}
 \end{example}
 
+\chapter{Série de Taylor e Maclaurim}
+
+Uma função $f$ contínua e infinitamente derivável pode ser representada por uma série de potências da forma
+$$
+    f(x)=
+        \sum_{n=0}{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n
+    =
+        f(a)
+        + \frac{f'(a)}{1!}(x-a)
+        + \frac{f''(a)}{2!}(x-a)^2
+        + \frac{f'''(a)}{3!}(x-a)^3
+        +\cdots
+        \text{,}
+$$
+onde $f^{(0)}(a)=f(a)$ e $f^{(n)}(a)$ é a derivada de ordem $n$ de $f$ no ponto $a$.
+
+Essa equação denomina-se série de Taylor da função $f$ em torno do ponto $x=a$. Quando $a=0$, a equação recebe o nome de série de Maclaurim, sendo representada por
+$$
+    f(x)=
+        \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}x^n
+    =
+    f(0)
+    +\frac{f'(0)}{1!}x
+    +\frac{f''(0)}{2!}x^2
+    +\frac{f'''(0)}{3!}x^3
+    +\cdots
+    \text{.}
+$$
+
+\begin{example}
+    Encontre a série de Taylor de $f(x)=e^x$ em torno do ponto 2.
+
+    É evidente que $f'(x)=e^x$ e, ainda, $f'(x)=f''(x)=f'''(x)=\cdots=e^x$ e, como $f(2)=e^2$, $f'(2)=f''(2)=f'''(2)=\cdots=e^2$. Tem-se, assim
+    $$
+    f(x)=e^x=
+    e^2
+    +\frac{e^2}{1!}(x-2)
+    +\frac{e^2}{2!}(x-2)^2
+    +\frac{e^2}{3!}(x-2)^3
+    + \cdots
+    = \sum_{n=0}^{\infty} \frac{e^2}{n!}(x-2)^n
+    \text{.}
+    $$
+\end{example}
+
+\begin{example}
+    Determine a série de Maclaurim para $e^x$.
+
+    É evidente que, como $f(x)=e^x$, $f'(x)=f''(x)=f'''(x)=\cdots=e^x$ e, ainda, que $f(0)=e^0=1$, donde $f'(0)=f''(0)=f'''(0)=\cdots=1$. Assim,
+    $$
+        f(x)=e^x=
+        \frac{1}{0!}
+        +\frac{1}{1!}x
+        +\frac{1}{2!}x^2
+        +\frac{1}{3!}x^3
+        +\cdots
+        =
+        \frac{1}{0!}
+        +\frac{x^2}{2!}
+        +\frac{x^3}{3!}
+        +\cdots
+        =
+        \sum_{n=0}^{\infty}\frac{x^n}{n!}
+        \text{,}
+    $$
+    portanto,
+    $$
+        e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}
+        \text{.}
+    $$
+\end{example}
+
+\begin{example}
+    Utilizando as séries de Taylor e Maclaurim de $e^x$, calcule $e^x$ para $x=3$, $x=2,1$, $x=1$, $x=0,1$ e $x=-1$, usando os cinco primeiros termos dessas séries.
+
+	\begin{center}
+    	\begin{tabular}{|c|c|c|c|c|c|}
+	    	\hline
+        	Valores de $x$ & 3 & 2,1 & 1 & 0,1 & -1\\
+    	    \hline
+	        $e^x$ & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...}\\
+        	\hline
+    	    Taylor & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...}\\
+        	\hline
+	        Maclaurim & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...} & {\color{red}...}\\
+    	    \hline
+	    \end{tabular}
+	\end{center}
+	
+	\todo{Responder exemplo...}
+\end{example}
+
 \end{document}
