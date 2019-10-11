@@ -652,6 +652,82 @@ Considere uma máquina qualquer e uma série de operações aritméticas. Pelo f
 	\todo{Resolver exemplo}
 \end{example}
 
+\section{Exercícios}
+
+\begin{enumerate}
+    \item Cite as fases e os principais erros na resolução de um problema. Defina as fases.
+
+    \item Considere os seguintes valores $x_1=0,00005183$ e $x_2=9876543210$. Utilizando uma calculadora científica (tipo Casio fx-82MS) no formato de exibição \textbf{Norm1} calcule as seguintes operações: $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Repita os cálculos usando \textbf{Norm 2}. Compare os resultados.
+
+    \item Converta os números a seguir na base binária para a decimal.
+        \begin{enumerate}
+            \item $(110101011)_2$.
+            \item $(10,11)_2$.
+            \item $(0,011)_2$.
+            \item $(1010,101)_2$.
+            \item $(1,1)_2$.
+        \end{enumerate}
+
+    \item Converta os números a seguir na base decimal para a binária.
+        \begin{enumerate}
+            \item $(37)_{10}$.
+            \item $(2345)_{10}$.
+            \item $(11,25)_{10}$.
+            \item $(0,85)_{10}$.
+            \item $(0,1217)_{10}$.
+        \end{enumerate}
+
+    \item Represente os números decimais a seguir num sistema de aritmética de ponto flutuante de 3 dígitos, base decimal e expoente no intervalo $[-3, 3]$.
+        \begin{enumerate}
+            \item $153$
+            \item $-4,25$
+            \item $0,71$.
+            \item $0,000005$.
+            \item $6913,4$.
+        \end{enumerate}
+
+    \item Quantos e quais números podem ser representados no sistema $F(2, 4, -1, 1)$?
+
+    \item Considere uma máquina digital na base binária que utiliza 16 bits da seguinte maneira: 1 bit para representar o sinal da mantissa, 10 bits para representar a mantissa, 1 bit para representar o sinal do expoente e 4 bits para representar o expoente.
+        \begin{enumerate}
+            \item Qual é o maior número armazenado por essa máquina? Converta o resultado para decimal.
+            \item Qual é o número positivo mais próximo de zero armazenado por essa máquina?
+        \end{enumerate}
+
+    \item Considere o sistema $F(10, 2, -4, 4)$. Represente os seguintes números decimais nesse sistema utilizando truncamento e depois arredondamento.
+        \begin{enumerate}
+            \item $758$.
+            \item $-3946$.
+            \item $0,0000071$.
+            \item $-98713,45$.
+            \item $0,000655$.
+        \end{enumerate}
+
+    \item Utilizando um sistema de aritmética de ponto flutuante de 4 dígitos e base decimal, some $1/6$ dez vezes consecutivas, usando arredondamento.
+
+    \item Calcule o valor do polinômio $2,75x^3-2,95x^2+3,16x-4,67$ para $x=1,07$, usando aritmética de ponto flutuante de 3 dígitos e arredondamento. Calcule o erro absoluto e relativo.
+
+    \item Resolva o exercício anterior usando o polinômio na seguinte forma: $((2,75x-2,95)x+3,16)x-4,67$ e compare os resultados.
+
+    \item Faça as seguintes operações, trabalhando em aritmética de ponto flutuante de 3 dígitos, base decimal e assumindo arredondamento no corte dos dígitos. Calcule os erros absolutos e relativos. Para o valor exato utilize o resultado da calculadora (fx-82MS) no formato de exibição \textbf{Norm 2}.
+        \begin{enumerate}
+            \item $72 + 0,654$.
+            \item $159-0,357$.
+            \item $(71-0,446)-19$.
+            \item $(71-19)-0,446$.
+            \item $9/2-9/7$.
+        \end{enumerate}
+
+    \item Seja um sistema de aritmética de ponto flutuante de 4 dígitos e base 10. Dados os números $x=0.7327\cdot 10^1$, $y=0.5421\cdot 10^{-3}$ e $z=0.5852\cdot 10^4$, efetue as operações a seguir assumindo truncamento e obtenha o erro absoluto e relativo.
+        \begin{enumerate}
+            \item $x+y+z$.
+            \item $(x+y)-z$.
+            \item $x+(y-z)$.
+            \item $(x/z)+(y/z)$.
+            \item $(x+y)/z$.
+        \end{enumerate}
+\end{enumerate}
+
 \chapter{Série de Taylor e Maclaurim}
 
 Uma função $f$ contínua e infinitamente derivável pode ser representada por uma série de potências da forma
