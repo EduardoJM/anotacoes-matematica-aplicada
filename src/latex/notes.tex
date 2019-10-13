@@ -822,4 +822,67 @@ $$
 	\end{center}
 \end{example}
 
+\begin{example}
+    Encontre a série de Taylor para a função $f(x)=sen(x)$ em torno do ponto $a$.
+
+    Utilizando a série
+    $$
+        f(x)=\sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n
+        \text{,}
+    $$
+    tem-se,
+    $$
+        f(x)=sen(a)+
+            \frac{cos(a)}{1!}(x-a)-
+            \frac{sen(a)}{2!}(x-a)^2-
+            \frac{cos(a)}{3!}(x-a)^3+
+            \frac{sen(a)}{4!}(x-a)^4+
+            \frac{cos(a)}{5!}(x-a)^5-
+            \cdots
+        \text{.}
+    $$
+\end{example}
+
+\begin{example}
+    Determine a série de Maclaurim para $f(x)=sen(x)$.
+
+    Utilizando a série
+    $$
+        f(x)=\sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}x^n
+        \text{,}
+    $$
+    tem-se que
+    $$
+        f(x)=sen(0)+
+            \frac{cos(0)}{1!}x-
+            \frac{sen(0)}{2!}x^2-
+            \frac{cos(0)}{3!}x^3+
+            \frac{sen(0)}{4!}x^4+
+            \frac{cos(0)}{5!}x^5-
+            \cdots
+    $$
+    $$
+        f(x)=x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots
+        =
+        \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+        \text{.}
+    $$
+\end{example}
+
+\begin{example}
+    Utilizando a série de Maclaurim de $sen(x)$, calcule $sen(x)$ para $x=\frac{\pi}{3}$, $\frac{\pi}{4}$ e $\frac{\pi}{6}$, usando os 4 primeiros termos dessa série.
+
+    \begin{center}
+    	\begin{tabular}{|c|c|c|c|}
+	    	\hline
+        	 & $\frac{\pi}{3}$ & $\frac{\pi}{4}$ & $\frac{\pi}{6}$ \\
+    	    \hline
+	        $sen(x)$     & 0,866025 & 0,7071068 & 0,5 \\
+        	\hline
+	        Maclaurim    & 0,866021 & 0,7071065 & 0,499999992 \\
+    	    \hline
+	    \end{tabular}
+	\end{center}
+\end{example}
+
 \end{document}
