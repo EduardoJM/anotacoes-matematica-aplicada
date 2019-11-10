@@ -198,6 +198,7 @@ Em relação ao arredondamento, observe que na interação entre usuário e o co
 Todo esse processo de conversão de base pode se constituir em uma fonte de erros de arredondamentos que pode afetar os resultados finais dos cálculos na resolução de um problema.
 
 \begin{example}
+	\label{example:x_1_x2_calculadora}
 	Considere os seguintes valores $x_1=0,003815$ e $x_2=1.234.567.890$ e, as operações $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Temos os seguintes resultados:
 
 	\begin{itemize}
@@ -887,5 +888,103 @@ $$
 	    \end{tabular}
 	\end{center}
 \end{example}
+
+\chapter{Sistemas Lineares}
+
+Um sistema linear com $n$ equações e $n$ incógnitas é escrito usualmente na forma:
+$$
+	\begin{cases}
+		a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1\\ 
+		a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2\\ 
+		\vdots\\
+		a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n
+	\end{cases} 
+	\text{,}
+$$
+onde $a_{ij}$ são os coeficientes, com $1\leqslant i,j \leqslant n$, $x_j$ são as incógnitas, com $j=1,\dots,n$, e $b_i$ são constantes, $i=1,\dots,n$.
+
+Usando notação matricial, o sistema pode ser representado por:
+$$
+    Ax=b
+    \text{,}
+$$
+onde 
+$$
+    A=\begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\ 
+        a_{21} & a_{22} & \cdots & a_{2n} \\ 
+        \vdots & \vdots &        & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn} \\ 
+    \end{bmatrix}
+$$
+é a matriz dos coeficientes e
+$$
+    x=\begin{bmatrix}
+        x_1\\
+        x_2\\
+        \vdots\\
+        x_n
+    \end{bmatrix}
+$$
+é o vetor das incógnitas e
+$$
+    b=\begin{bmatrix}
+        b_1\\
+        b_2\\
+        \vdots\\
+        b_n
+    \end{bmatrix}
+$$
+é o vetor das constantes.
+
+Denominamos $x*$ o vetor solução do sistema linear $Ax=b$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{figuras/figura_003.png}
+	\caption{Classificação dos Sistemas Lineares.}
+\end{figure}
+
+\begin{example}\hfill
+    \begin{enumerate}
+        \item $
+            \begin{cases}
+                x_1+x_2=6\\
+                x_1-x_2=2
+            \end{cases}
+            \Longrightarrow x*=\begin{bmatrix} 4\\2 \end{bmatrix}
+            \text{,}
+        $
+        portanto, o sistema linear é compatível determinado.
+        
+        \item $
+        	\begin{cases}
+                2x_1+x_2=3\\
+                4x_1+2x_2=6
+            \end{cases}
+            \Longrightarrow x*=\begin{bmatrix} \alpha\\3-2\alpha \end{bmatrix}
+            \text{,}\forall \alpha\in\mathbb{R}
+        $
+        portanto, o sistema linear é compatível indeterminado.
+        
+        \item $
+        	\begin{cases}
+                x_1+x_2=1\\
+                x_1+x_2=3
+            \end{cases}
+            \Longrightarrow x*=\varnothing
+            \text{,}
+        $
+        portanto, o sistema é incompatível.
+    \end{enumerate}
+\end{example}
+
+\section{Resolução de Sistemas Lineares}
+
+\begin{itemize}
+    \item \textbf{Métodos Diretos}: são aqueles que forneceriam a solução exata, se não fossem os erros provenientes da representação dos números, com um número finito de operações.
+
+    \item \textbf{Métodos Interativos}: são aqueles que permitem obter uma aproximação para a solução do sistema linear, com uma dada precisão, através de processo infinito convergente.
+\end{itemize}
 
 \end{document}
