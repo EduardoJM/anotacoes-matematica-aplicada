@@ -12,9 +12,11 @@
 
 \newtheorem{example}{Exemplo}
 \newtheorem{remark}{Observação}
+\newtheorem{definition}{Definição}
 
 \numberwithin{example}{chapter}
 \numberwithin{remark}{chapter}
+\numberwithin{definition}{chapter}
 
 \usepackage[left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
 \title{Matemática Aplicada e Computacional}
@@ -107,6 +109,14 @@
 		\end{tikzpicture}
 	\end{figure}
 }
+
+\makeatletter
+\renewenvironment{cases}[1][l]{\matrix@check\cases\env@cases{#1}}{\endarray\right.}
+\def\env@cases#1{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrace\def\arraystretch{1.2}%
+  \array{@{}#1@{\quad}l@{}}}
+\makeatother
 
 \newcommand{\todo}[1]{
 	{\color{red}#1}
@@ -986,5 +996,307 @@ Denominamos $x*$ o vetor solução do sistema linear $Ax=b$.
 
     \item \textbf{Métodos Interativos}: são aqueles que permitem obter uma aproximação para a solução do sistema linear, com uma dada precisão, através de processo infinito convergente.
 \end{itemize}
+
+\section{Sistemas Lineares Triangulares}
+
+Um sistema linear $Ax=b$ de ordem $n$ é triangular superior se a matriz $A=(a_{ij})$ é tal que $a_{ij}=0$ para $j<i$, onde $i$, $j=1,2,\dots,n$, ou seja
+$$
+    \begin{cases}[r]
+        a_{11}x_1 + a_{12}x_2 + a_{13}x_3 + \cdots + a_{1n}x_n & = b_1\\
+        a_{22}x_2 + a_{23}x_3 + \cdots + a_{2n}x_n & = b_2\\
+        a_{33}x_3 + \cdots + a_{3n}x_n & = b_3\\
+        \ddots \hspace{37pt} \vdots & \vdots \\
+        a_{nn}x_n & = b_n
+    \end{cases}
+    \text{,}
+$$
+onde $a_{ij}\neq 0$ para $i=j$. Assim a solução desse sistema é obtida por substituição retroativa, isto é, determina-se o valor de $x_n$ na última equação, substituí-se este valor na penúltima equação e determina-se o valor de $x_{n-1}$ e assim sucessivamente até que determine-se o valor de $x_1$.
+
+Algebricamente tem-se
+$$
+    x_n=\frac{bn}{a_{nn}}
+    \text{,}
+    x_{n-1}=\frac{b_{n-1}-a_{n-1,n}x_n}{a_{n-1,n-1}}
+    \text{,}\dots\text{,}
+    x_1=\frac{b_1-a_{12}x_2-a_{13}x_3 + \cdots + a_{1n}x_n}{a_{11}}
+    \text{,}
+$$
+ou seja
+$$
+    x_n=\frac{b_n}{a_{nn}}
+    \text{,}
+$$
+e
+$$
+    x_i=\frac{b_i-\sum_{j=i+1}^{n} a_{ij}x_j}{a_{ii}}
+    \text{,}
+$$
+onde $i=n-1,\dots,1$.
+
+\begin{remark}
+    Se a matriz $A=(a_{ij})$ é tal que $a_{ij}=0$ para $j>i$, $i,j=1,2,\dots,n$ então tem-se um sistema triangular inferior.
+\end{remark}
+
+\begin{example}
+	Determine a solução do sistema a seguir
+	$$
+    	\begin{cases}[r]
+        	3x_1 + 4x_2 + 5x_3 + x_4 & = 10\\
+	        x_2 + x_3 -2x_4 & = -1\\
+    	    4x_3 - 5x_4 & = 3\\
+        	2x_4 & = 2
+	    \end{cases}
+    	\text{.}
+	$$
+	\todo{Resolver o sistema}
+\end{example}
+
+\section{Transformações Elementares}
+
+Denominaremos de transformações elementares, as seguintes operações sobre as linhas de um sistema linear:
+
+\begin{enumerate}
+    \item multiplicar uma linha por uma constante $c$ não nula.
+
+    \item trocar a ordem de duas linhas de um sistema.
+
+    \item substituir a linha $r$ pela linha $s$ multiplicada por uma constante $c\neq 0$ somada a linha $r$.
+\end{enumerate}
+
+\begin{definition}
+    Dizemos que dois sistemas lineares $S_1$ e $S_2$ são equivalentes se $S_2$ puder ser obtido de $S_1$ através de transformações elementares.
+\end{definition}
+
+\begin{remark}
+    Dois sistemas equivalentes possuem as mesmas soluções ou são incompatíveis.
+\end{remark}
+
+\section{Método de Gauss ou Gauss Simples}
+
+O método de eliminação de Gauss consiste em transformar o sistema original em um sistema equivalente na forma triangular superior.
+
+\begin{example}
+    Para resolver o sistema pelo método de Gauss
+    $$
+        \begin{cases}
+            2x_1 + 3x_2 - x_3 = 5\\
+            4x_1 + 4x_2 - 3x_3 = 3\\
+            2x_1 - 3x_2 + x_3 = -1
+        \end{cases}
+        \text{,}
+    $$
+    tem-se a representação matricial (matriz aumentada)
+    $$
+        \begin{bmatrix}
+            2 & 3 & -1 &|& 5\\
+            4 & 4 & -3 &|& 3\\
+            2 & -3 & 1 &|& -1
+        \end{bmatrix}
+        \text{.}
+    $$
+    \begin{itemize}
+        \item \textbf{Primeiro Passo: } eliminar a incógnita $x_1$ das equações 2 e 3.
+        $$
+        	\begin{array}{r l}
+	            L_1 & \longrightarrow L_1\\[10pt]
+            	c_{21}L_1 + L_2 & \longrightarrow L_2\text{; } c_{21}=-\frac{a_{21}}{a_{11}}=-\frac{4}{2}=-2\\[10pt]
+        	    c_{31}L_1+L_3 & \longrightarrow L_3\text{; } c_{31}=-\frac{a_{31}}{a_{11}}=-\frac{2}{2}=-1
+            \end{array}
+        $$
+        $$
+	        \begin{bmatrix}
+            	2 & 3 & -1 &|& 5\\
+	            0 & -2 & -1 &|& -7\\
+    	        0 & -6 & 2 &|& -6
+    	    \end{bmatrix}
+	    $$
+	    
+		\item \textbf{Segundo Passo: } eliminar a incógnita $x_2$ da equação 3.
+        $$
+        	\begin{array}{r l}
+	            L_1 & \longrightarrow L_1\\[10pt]
+            	L_2 & \longrightarrow L_2\\[10pt]
+        	    c_{32}L_2+L_3 & \longrightarrow L_3\text{; } c_{32}=-\frac{a_{32}}{a_{22}}=-\frac{6}{2}=-3
+            \end{array}
+        $$
+        $$
+	        \begin{bmatrix}
+            	2 & 3 & -1 &|& 5\\
+	            0 & -2 & -1 &|& -7\\
+    	        0 & 0 & 5 &|& 15
+    	    \end{bmatrix}
+	    $$
+    \end{itemize}
+    
+    A matriz aumentada resulta no sistema
+	$$
+    	\begin{cases}[r]
+        	2x_1 + 3x_2 - x_3 & = 5\\
+	        -2x_2 - x_3 & = -7\\
+    	    5x_3 & = 15\\
+	    \end{cases}
+    	\text{.}
+	$$
+	que tem solução
+	$$
+		x^{*}=
+		\begin{bmatrix}
+			1\\
+			2\\
+			3
+		\end{bmatrix}
+		\text{.}
+	$$    
+\end{example}
+
+\subsection{Exercícios}
+\begin{enumerate}
+	\item Resolver o sistema pelo método de Gauss:
+	$$
+	    \begin{cases}
+    	    3x_1 + 2x_2 + 4x_3 = 1\\
+	        x_1 + x_2 + 2x_3 = 2\\
+        	4x_1 + 3x_2 - 2x_3 = 3
+    	\end{cases}
+	$$
+\end{enumerate}
+
+\section{Método de Gauss-Jordan}
+
+Consiste em transformar o sistema original em um sistema diagonal equivalente.
+
+\begin{example}
+    Resolva o sistema pelo método de Gauss-Jordan
+    $$
+        \begin{cases}
+            x_1+x_2+2x_3 = 4\\
+            2x_1-x_2-x_3=0\\
+            x_1-x_2-x_3=-1
+        \end{cases}
+        \text{,}
+    $$
+    onde a matriz aumentada é
+    $$
+        \begin{bmatrix}
+            1 & 1 & 2 & | & 4\\
+            2 & -1 & -1 & | & 0\\
+            1 & -1 & -1 & | & -1
+        \end{bmatrix}
+        \text{.}
+    $$
+
+    \begin{itemize}
+        \item \textbf{Primeira etapa: } transformar o sistema original em um sistema equivalente na forma triangular superior (Gauss Simples).
+
+        \begin{itemize}
+            \item \textbf{Primeiro passo: } eliminar a incógnita $x_1$ das equações 2 e 3.
+            $$
+            	\begin{array}{r l}
+	                L_1 & \longrightarrow L_1\\[10pt]
+                	c_{21}L_1+L_2 & \longrightarrow L_2\text{; } c_{21}=-\frac{a_{21}}{a_{11}}=-\frac{2}{1}=-2\\[10pt]
+            	    c_{31}L_1+L_3 & \longrightarrow L_3\text{; } c_{31}=-\frac{a_{31}}{a_{11}}=-\frac{1}{1}=-1
+                \end{array}
+            $$
+            $$
+	            \begin{bmatrix}
+                	1 & 1 & 2 &|& 4\\
+	                0 & -3 & -5 &|& -8\\
+        	        0 & -2 & -3 &|& -5
+        	    \end{bmatrix}
+	        $$
+
+            \item \textbf{Segundo passo: } eliminar a incógnita $x_2$ da equação 3.
+            $$
+            	\begin{array}{r l}
+	                L_1 & \longrightarrow L_1\\[10pt]
+                	L_2 & \longrightarrow L_2\\[10pt]
+            	    c_{32}L_2+L_3 & \longrightarrow L_3\text{; } c_{32}=-\frac{a_{32}}{a_{22}}=-\frac{-2}{-3}=-\frac{2}{3}
+                \end{array}
+            $$
+            $$
+	            \begin{bmatrix}
+                	1 & 1 & 2 &|& 4\\
+	                0 & -3 & -5 &|& -8\\
+        	        0 & 0 & \frac{1}{3} &|& \frac{1}{3}
+        	    \end{bmatrix}
+	        $$
+        \end{itemize}
+
+        \item \textbf{Segunda etapa: } transformar o sistema triangular superior em um sistema equivalente na forma diagonal.
+
+        \begin{itemize}
+            \item \textbf{Primeiro passo: } eliminar a incógnita $x_3$ das equações 1 e 2.
+            $$
+            	\begin{array}{r l}
+	                L_3 & \longrightarrow L_3\\[10pt]
+                	c_{23}L_3 + L_2 & \longrightarrow L_2\text{; } c_{23}=-\frac{a_{23}}{a_{33}}=-\frac{-5}{\frac{1}{3}}=15\\[10pt]
+            	    c_{13}L_3+L_1 & \longrightarrow L_1\text{; } c_{13}=-\frac{a_{13}}{a_{33}}=-\frac{2}{\frac{1}{3}}=-6
+                \end{array}
+            $$
+            $$
+	            \begin{bmatrix}
+                	1 & 1 & 0 &|& 2\\
+	                0 & -3 & 0 &|& -3\\
+        	        0 & 0 & \frac{1}{3} &|& \frac{1}{3}
+        	    \end{bmatrix}
+	        $$
+
+            \item \textbf{Segundo passo: } eliminar a incógnita $x_2$ da equação 1.
+            $$
+            	\begin{array}{r l}
+	                L_3 & \longrightarrow L_3\\[10pt]
+                	L_2 & \longrightarrow L_2\\[10pt]
+            	    c_{12}L_2+L_1 & \longrightarrow L_1\text{; } c_{12}=-\frac{a_{12}}{a_{22}}=-\frac{1}{-3}=\frac{1}{3}
+                \end{array}
+            $$
+            $$
+	            \begin{bmatrix}
+                	1 & 0 & 0 &|& 1\\
+	                0 & -3 & 0 &|& -3\\
+        	        0 & 0 & \frac{1}{3} &|& \frac{1}{3}
+        	    \end{bmatrix}
+	        $$
+        \end{itemize}
+
+        \item \textbf{Terceira etapa: } transformar a matriz dos coeficientes em uma matriz identidade.
+        $$
+        	\begin{array}{r l}
+                L_1 & \longrightarrow L_1\\[10pt]
+            	\frac{L_2}{a_{22}} & \longrightarrow L_2\\[10pt]
+        	    \frac{L_3}{a_{33}} & \longrightarrow L_3
+            \end{array}
+        $$
+        $$
+            \begin{bmatrix}
+            	1 & 0 & 0 &|& 1\\
+                0 & 1 & 0 &|& 1\\
+    	        0 & 0 & 1 &|& 1
+    	    \end{bmatrix}
+        $$
+    \end{itemize}
+    Assim, a solução do sistema é 
+    $$
+        x^{*}=
+        \begin{bmatrix}
+            1\\
+            1\\
+            1
+        \end{bmatrix}
+        \text{.}
+    $$
+\end{example}
+
+\subsection{Exercícios}
+
+\begin{enumerate}
+    \item Resolva pelo método de Gauss-Jordan
+    $$
+        \begin{cases}
+            3x_1-2x_2+x_3=8\\
+            x_1-3x_2+4x_3=6\\
+            9x_1+4x_2-5x_3=11
+        \end{cases}
+    $$
+\end{enumerate}
 
 \end{document}
