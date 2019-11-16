@@ -1,26 +1,92 @@
-\documentclass[12pt,a4paper]{book}
+%\documentclass[12pt,a4paper]{book}
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em frente e verso.
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+]{abntex2}
 \usepackage[utf8]{inputenc}
-\usepackage[portuguese]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.3cm}
+\usepackage{microtype}
+\usepackage{lettrine}
+\usepackage{xspace}
+\usepackage{leading}
+\leading{13pt}
 \usepackage{tikz}
 \usetikzlibrary{matrix}
 
 \newtheorem{example}{Exemplo}
 \newtheorem{remark}{Observação}
 \newtheorem{definition}{Definição}
+\newenvironment{solution}{
+	\begin{proof}[Solução]
+}{\end{proof}}
 
 \numberwithin{example}{chapter}
 \numberwithin{remark}{chapter}
 \numberwithin{definition}{chapter}
+\numberwithin{figure}{chapter}
 
-\usepackage[left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
-\title{Matemática Aplicada e Computacional}
-\author{Eduardo José de Oliveira}
+\definecolor{blue}{RGB}{41,5,195}
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{livro}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+\chapterstyle{veelo} 
+
+\makepagestyle{abntbookheadings}
+\makeevenhead{abntbookheadings}{\ABNTEXfontereduzida\thepage}{}{\ABNTEXfontereduzida\textit\leftmark}
+\makeoddhead{abntbookheadings}{\ABNTEXfontereduzida\textit\rightmark}{}{\ABNTEXfontereduzida\thepage}
+\makeheadrule{abntbookheadings}{\textwidth}{\normalrulethickness}
+
+% Cabecalho do inicio do capitulo
+\makepagestyle{abntbookchapfirst}
+\makeoddhead{abntbookchapfirst}{}{}{}
+
+% Configura layout para elementos textuais
+\renewcommand{\textual}{%
+  \pagestyle{abntbookheadings}%
+  \aliaspagestyle{chapter}{abntbookchapfirst}% customizing chapter pagestyle
+  \nouppercaseheads%
+  \bookmarksetup{startatroot}% 
+}
+
+\setlrmarginsandblock{2.5cm}{3.5cm}{*}
+\setulmarginsandblock{2.5cm}{3.5cm}{*}
+\checkandfixthelayout
 
 \newcount\total
 \newcount\lasttotal
@@ -122,22 +188,110 @@
 	{\color{red}#1}
 }
 
+
+
+\titulo{Notas de Aula: Matemática Aplicada e Computacional}
+\autor{Eduardo José de Oliveira}
+\data{2019}
+\preambulo{Breve sinopse do livro}
+\local{Goiás}
+\instituicao{Nome da instituição}
+
+
 \begin{document}
+\frenchspacing
+
+\frontmatter
 
 
-%
-%
-%
+\begin{titlingpage}
+\phantom{xxx}
+\vspace{0.5cm}
+\huge
+\raggedright
+\imprimirautor\\
+\vspace{2.5cm}
+\huge 
+{\raggedleft
+%\includegraphics[scale=0.9]{abntex2-modelo-img-marca.pdf}\\[1cm]
+\textit{\textcolor{blue}{\imprimirtitulo}}\\[1cm]
+}
+\centering 
+%  %este é um símbolo que só aparecerá com a fonte Minion.
+\vfill
+\Large
+% %este é um símbolo que só aparecerá com a fonte Minion.
+\imprimirinstituicao
+\end{titlingpage}
+% ---
+
+% ---
+% Contra-capa
+% ---
+\begin{titlingpage}
+
+\phantom{xxx}
+\vspace{0.5cm}
+\huge
+\raggedright
+\imprimirautor\\
+\vspace{2.5cm}
+\huge 
+{\raggedleft
+%\includegraphics[scale=0.9]{abntex2-modelo-img-marca.pdf}\\[1cm]
+\textit{\textcolor{blue}{\imprimirtitulo}}\\[1cm]
+}
+\centering 
+% %este é um símbolo que só aparecerá com a fonte Minion.
+\vfill
+\Large
+% %este é um símbolo que só aparecerá com a fonte Minion.
+\imprimirinstituicao
+% ---
+
+% ---
+% Verso da contra-capa
+% ---
+\clearpage
+\ABNTEXfontereduzida
+%\raggedright
+© 2019 \imprimirautor
+
+Qualquer parte desta publicação pode ser reproduzida, desde que citada a fonte.
+\vspace*{\fill}
+
+\end{titlingpage}
+
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+
+\mainmatter
+
+\chapter*[Introdução]{Introdução}
+\addcontentsline{toc}{chapter}{Introdução}
+
+\todo{Escrever a introdução.}
+
 \chapter{Conceitos Iniciais}
 
-\section{Introdução}
-
-As fases na resolução de problemas em matemática aplicada e computacional que surgem nas mais diversas áreas do conhecimento, de modo geral, podem ser representadas da seguinte maneira:
+As fases na resolução de problemas em matemática aplicada e computacional que surgem nas mais diversas áreas do conhecimento, de modo geral, podem ser representadas como na Figura \ref{fig:fases_resolucao_problemas}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.2]{figuras/figura_001}
 	\caption{Fluxograma das fases na resolução de problemas em Matemática Aplicada e Computacional.}
+	\includegraphics[scale=0.2]{figuras/figura_001}
+	\fonte{Elaborado pelo autor, 2019.}
+	\label{fig:fases_resolucao_problemas}
 \end{figure}
 
 A primeira fase consiste basicamente em definir corretamente o problema a ser solucionado. A fase da modelagem matemática é onde ocorre a construção ou definição do modelo matemático que irá descrever o comportamento do problema em questão. Na fase de resolução são definidos e implementados os métodos para obtenção da solução do problema.
@@ -157,23 +311,26 @@ Não definir corretamente o problema é um erro grave que pode levar a falsos re
 O modelo matemático para um problema real deve representar o fenômeno que ocorre no mundo físico, porém, nem sempre é fácil. Normalmente são necessárias simplificações no modelo físico para se obter um modelo matemático (tratável) que fornecerá uma solução para o problema. Essas simplificações se constituem em fonte de erros, o que pode acarretar na necessidade de reformular o modelo matemático adotado.
 
 \begin{example}
-	Um matemático quer determinar a altura de um edificio dispondo de uma esfera de metal, um cronômetro e a equação $s=s_0+v_0 t+ \frac{1}{2}at^2$. Para isso, ele sobe no topo do edificio e solta a esfera de metal anotando o tempo até a mesma tocar o solo, ou seja, 3 segundos.
+	Um matemático quer determinar a altura de um edificio dispondo de uma esfera de metal, um cronômetro e a equação $s=s_0+v_0 t+ \frac{1}{2}at^2$. Para isso, ele sobe no topo do edificio e solta a esfera de metal anotando o tempo até a mesma tocar o solo, ou seja, 3 segundos, como na Figura \ref{fig:representacao_predio_queda}.
 	
 	\begin{figure}[h]
 		\centering
+		\caption{Representação do predio e o tempo de queda}
 		\includegraphics[scale=0.15]{figuras/figura_002}
+		\fonte{Elaborada pelo autor, 2019.}
+		\label{fig:representacao_predio_queda}
 	\end{figure}
 	
-	Logo, tem-se $s=s_0+v_0 t+\frac{1}{2}at^2=0+0\cdot 3 + \frac{1}{2}\cdot 9,8 \cdot 3^2=44,1$ m.
-	
-	Esse resultado é confiável?
-	
+	Logo, tem-se $s=s_0+v_0 t+\frac{1}{2}at^2=0+0\cdot 3 + \frac{1}{2}\cdot 9,8 \cdot 3^2=44,1$ m. Esse resultado é confiável?
+\end{example}
+
+\begin{solution}	
 	Provavelmente não, pois o modelo matemático utilizado não considera outras variáveis relevantes como, por exemplo, a resistência do ar, a velocidade do vento dentre outras.
 	
 	Além disso, há outro fato que pode influenciar diretamente a precisão na leitura do cronômetro, pois uma pequena variação nessa leitura pode acarretar uma grande variação no cálculo da altura do edificio. Se o tempo medido fosse de 3,5 segundos ao invés de 3 segundos, a altura do edificio seria calculada em 60,025 m. Ou seja, uma variação de 16,67\% na leitura do cronômetro ocasiona uma variação de 36,11\% no cálculo da altura do edifício.
 	
 	Logo pode-se notar a influência que o modelo matemático e a precisão dos dados de entrada exercem sobre a confiabilidade dos resultados.
-\end{example}
+\end{solution}
 
 \begin{remark}
 	Durante a aula, foi proposta uma atividade semelhante em que, utilizando o cronômetro dos celulares e uma bolinha, em duplas, realizando procedimento parecido com o do exemplo, os alunos deveriam estimar a altura da porta da sala de aula.
@@ -209,17 +366,17 @@ Todo esse processo de conversão de base pode se constituir em uma fonte de erro
 
 \begin{example}
 	\label{example:x_1_x2_calculadora}
-	Considere os seguintes valores $x_1=0,003815$ e $x_2=1.234.567.890$ e, as operações $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Temos os seguintes resultados:
-
-	\begin{itemize}
-		\item \textbf{Calculadora científica (10 digitos):}\hfill
-		$$(x_1+x_2)-x_2=(0,003815+1.234.567.890)-1.234.567.890=$$
-		$$=1.234.567.890-1.234.567.890=0\text{,}$$
-		e, no segundo caso,
-		$$x_1+(x_2-x_2)=0,003815+(1.234.567.890-1.234.567.890)=$$
-		$$=0,003815+0=0,003815\text{.}$$
-	\end{itemize}
+	Considere os seguintes valores $x_1=0,003815$ e $x_2=1.234.567.890$ e, as operações $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Realize os cálculos utilizando uma calculadora científica de 10 digitos.
 \end{example}
+
+\begin{solution}
+	Para o primeiro caso,
+	$$(x_1+x_2)-x_2=(0,003815+1.234.567.890)-1.234.567.890=$$
+	$$=1.234.567.890-1.234.567.890=0\text{,}$$
+	e, no segundo caso,
+	$$x_1+(x_2-x_2)=0,003815+(1.234.567.890-1.234.567.890)=$$
+	$$=0,003815+0=0,003815\text{.}$$
+\end{solution}
 
 
 \section{Exercícios}
@@ -949,10 +1106,14 @@ $$
 
 Denominamos $x*$ o vetor solução do sistema linear $Ax=b$.
 
+Os sistemas lineares podem ser classificados de acordo com a quantidade de soluções que possui (Ver Figura \ref{fig:classificacao_sistemas_lineares}).
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{figuras/figura_003.png}
 	\caption{Classificação dos Sistemas Lineares.}
+	\includegraphics[scale=0.5]{figuras/figura_003.png}
+	\fonte{Elaborada pelo autor, 2019.}
+	\label{fig:classificacao_sistemas_lineares}
 \end{figure}
 
 \begin{example}\hfill
@@ -1298,5 +1459,21 @@ Consiste em transformar o sistema original em um sistema diagonal equivalente.
         \end{cases}
     $$
 \end{enumerate}
+
+
+
+
+
+\begin{apendicesenv}
+	\partapendices
+	
+	\chapter{Linguagem R}
+	
+	Lorem ipsum dolor sit amet.
+	
+	%\chapter{Linguagem Python}
+	
+	%Lorem ipsum dolor sit amet.
+\end{apendicesenv}
 
 \end{document}
