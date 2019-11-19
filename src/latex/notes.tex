@@ -1,4 +1,4 @@
-%\documentclass[12pt,a4paper]{book}
+% define a classe do documento como a classe 'abntex2'
 \documentclass[
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
@@ -35,10 +35,16 @@
 \usepackage{tikz}
 \usetikzlibrary{matrix}
 
+% define o ambiente 'Exemplo' como 'example'
 \newtheorem{example}{Exemplo}
+% define o ambiente Observação como 'remark'
 \newtheorem{remark}{Observação}
+% define o ambiente Definição como 'definition'
 \newtheorem{definition}{Definição}
+% define um novo ambiente para a resolução de exemplos
 \newenvironment{solution}{
+	% apenas simplifica a declaração do ambiente proof do pacote amsthm
+	% com o nome Solução.
 	\begin{proof}[Solução]
 }{\end{proof}}
 
@@ -84,7 +90,9 @@
   \bookmarksetup{startatroot}% 
 }
 
+% Altera as margens left/right (esquerda/direita)
 \setlrmarginsandblock{2.5cm}{3.5cm}{*}
+% Altera as margens up/low (cima/baixo)
 \setulmarginsandblock{2.5cm}{3.5cm}{*}
 \checkandfixthelayout
 
@@ -217,10 +225,8 @@
 \textit{\textcolor{blue}{\imprimirtitulo}}\\[1cm]
 }
 \centering 
-%  %este é um símbolo que só aparecerá com a fonte Minion.
 \vfill
 \Large
-% %este é um símbolo que só aparecerá com a fonte Minion.
 \imprimirinstituicao
 \end{titlingpage}
 % ---
@@ -1196,6 +1202,8 @@ onde $i=n-1,\dots,1$.
 
 \begin{remark}
     Se a matriz $A=(a_{ij})$ é tal que $a_{ij}=0$ para $j>i$, $i,j=1,2,\dots,n$ então tem-se um sistema triangular inferior.
+    
+    \todo{escrever as soluções para esse tipo}
 \end{remark}
 
 \begin{example}
