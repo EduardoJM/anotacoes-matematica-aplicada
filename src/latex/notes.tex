@@ -1468,6 +1468,155 @@ Consiste em transformar o sistema original em um sistema diagonal equivalente.
     $$
 \end{enumerate}
 
+\section{Método de Jacobi}
+
+Considere um sistema $Ax=b$, com $a_{ii}\neq 0$, $i=1,2,\dots,n$, então podemos isolar $x_1$ utilizando a primeira equação, $x_2$ utilizando a segunda equação e assim sucessivamente, ou seja, podemos reescrever o sistema
+$$
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1\\
+        a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2\\
+        \vdots\\
+        a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n
+    \end{cases}
+$$
+na forma
+$$
+    x_1 = \frac{1}{a_{11}} (b_1 - a_{12}x_2 - a_{13}x_3 - \cdots - a_{1n}x_n)
+$$
+$$
+    x_2 = \frac{1}{a_{22}} (b_2 - a_{21}x_1 - a_{23}x_3 - \cdots - a_{2n}x_n)
+$$
+$$
+    \vdots
+$$
+$$
+    x_n = \frac{1}{a_{nn}} (b_n - a_{n1}x_2 - a_{n2}x_2 - \cdots - a_{n,n-1}x_{n-1})
+    \text{,}
+$$
+ou ainda,
+$$
+    x_1 = \frac{b_1 - \displaystyle\sum_{j=2}^n a_{1j} x_j }{a_{11}}
+$$
+$$
+    x_2 = \frac{b_2 - \displaystyle\sum_{\substack{j=1\\j\neq 2}}^n a_{2j} x_j }{a_{22}}
+$$
+$$
+    \vdots
+$$
+$$
+    x_n = \frac{b_n - \displaystyle\sum_{j=1}^{n-1} a_{nj}x_j}{a_{nn}}
+    \text{.}
+$$
+
+Logo, para $x_i$, tem-se
+$$
+    x_i = \frac{b_i - \displaystyle\sum_{\substack{j=1\\j\neq i}}^n a_{ij}x_j}{a_{ii}}
+    \text{,}
+$$
+onde $i=1,2,\dots,n$.
+
+Dessa forma, dada uma aproximação inicial $X^{(0)}=(x_1^{(0)}, x_2^{(0)}, \dots, x_n^{(0)})^T$, calcula-se uma nova aproximação $X^{(1)}$ dada por:
+$$
+    x_i^{(1)} = \frac{b_i - \displaystyle\sum_{\substack{j=1\\j\neq i}}^n a_{ij}x_j^{(0)}}{a_{ii}}\text{,}
+$$
+com $i=1,2,\dots,n$. Utiliza-se agora o vetor $X^{(1)}=(x_1^{(1)}, x_2^{(1)}, \dots, x_n^{(1)})^T$ para calcular um novo vetor de aproximações $X^{(2)}$ e, assim sucessivamente, até que um critério de parada seja satisfeito.
+
+\subsection{Teste de Parada}
+
+Os testes de parada mais usuais são:
+\begin{itemize}
+    \item \textbf{erro absoluto: } $d^{(k)}=\displaystyle\max_{1\leqslant i\leqslant n} |x_i^{(k)} - x_i^{(k-1)}|$.
+
+    \item \textbf{erro relativo: } $d_r^{(k)}=\dfrac{d^{(k)}}{\displaystyle\max_{1\leqslant i\leqslant n} |x_i^{(k)}|}$.
+\end{itemize}
+
+Assim, dada uma precisão $\varepsilon$, o vetor $X^{(k)}$ será escolhido como solução aproximada ($\overline{x}$) da solução exata ($x^{*}$), se $d^{(k)}<\varepsilon$ ou $d_r^{(k)} < \varepsilon$, respectivamente, para cada caso.
+
+\begin{remark}
+    Computacionalmente, é também usado como teste de parada um número máximo de interações.
+\end{remark}
+
+\begin{example}
+    Resolva o seguinte sistema linear pelo método de Jacobi com $X^{(0)}=(0,7; -1,6; 0,6)^T$, utilizando como critério de parada o erro relativo com $\varepsilon=0,5\cdot 10^{-1}$:
+    $$
+        \begin{cases}
+            10x_1 + 2x_2 + x_3 = 7\\
+            x_1 + 5x_2 + x_3 = -8\\
+            2x_1 + 3x_2 + 10x_3 = 6
+        \end{cases}
+    $$
+\end{example}
+
+\begin{proof}[Solução]
+	\hfill
+	
+	\begin{itemize}
+	    \item \textbf{Primeira interação:}\hfill
+	    $$
+	        x_1^{(1)}=\frac{b_1-\displaystyle \sum_{j=2}^n a_{ij}x_j^{(0)}}{a_11}
+	        =
+	        \frac{7-(2x_2^{(0)} + x_3^{(0)})}{10}
+	        =
+	        \frac{7-(2(-1,6)+0,6)}{10}
+	        =0,96
+	    $$
+	    $$
+	        x_2^{(1)}=\frac{-8-(x_1^{(0)}+x_3^{(0)})}{5}
+	        =
+	        \frac{-8-(0,7+0,6)}{5}
+	        =-1,86
+	    $$
+	    $$
+	        x_3^{(1)}=\frac{6-(2x_1^{(0)}+3x_2^{(0)})}{10}
+	        =
+	        \frac{6-(2(0,7)+3(-1,6))}{10}
+	        =0,94
+	        \text{,}
+	    $$
+	    onde tem-se $X^{(1)}=(0,96; -1,86; 0,94)^T$. Calculando os erros absolutos,
+	    \begin{itemize}
+	        \item $|x_1^{(1)}-x_1^{(0)}|=|0,96-0,7|=0,26$.
+	        \item $|x_2^{(1)}-x_2^{(0)}|=|-1,86-(-1,6)|=0,26$.
+	        \item $|x_3^{(1)}-x_3^{(0)}|=|0,94-0,6|=0,34$.
+	    \end{itemize}
+	    
+	    Deste modo, $d^{(1)}=0,34$ e $d_r^{(1)}=\dfrac{0,34}{1,86}=0,1828$, que, sendo maior que $\varepsilon=0,5\cdot 10^{-1}$, deve-se passar a proxima interação.
+	
+	    \item \textbf{Segunda interação: }\hfill
+	    $$
+	        x_1^{(2)}=\frac{7-(2x_2^{(1)}+x_3^{(1)})}{10}
+	        =
+	        \frac{7-(2(-1,86)+0,94)}{10}
+	        =0,978
+	    $$
+	    $$
+	        x_2^{(2)}=\frac{-8-(x_1^{(1)}+x_3^{(1)})}{5}
+	        =
+	        \frac{-8-(0,96+0,94)}{5}
+	        =-1,98
+	    $$
+	    $$
+	        x_3^{(2)}=\frac{6-(2x_1^{(1)}+3x_2^{(1)}}{10}
+	        =
+	        \frac{6-(2(0,96)+3(-1,86))}{10}
+	        =0,966
+	        \text{,}
+	    $$
+	    onde tem-se $X^{(2)}=(0,978; -1,98; 0,966)^T$. Calculando os erros absolutos,
+	    \begin{itemize}
+	        \item $|x_1^{(2)}-x_1^{(1)}|=|0,978-0,96|=0,018$.
+	        \item $|x_2^{(2)}-x_2^{(1)}|=|-1,98-(-1,86)|=0,12$.
+	        \item $|x_3^{(2)}-x_3^{(1)}|=|0,966-0,94|=0,026$.
+	    \end{itemize}
+	
+	    Assim, $d^{(2)}=0,12$ e $d_r^{(2)}=\dfrac{0,12}{1,98}=0,0606>\varepsilon$, deve-se passar a proxima interação.
+	    
+	    \item \textbf{Terceira interação: }\hfill
+	    
+	    \todo{Fazer terceira interação}.
+	\end{itemize}
+\end{proof}
+
 
 
 
