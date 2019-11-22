@@ -32,8 +32,9 @@
 \usepackage{xspace}
 \usepackage{leading}
 \leading{13pt}
-\usepackage{tikz}
-\usetikzlibrary{matrix}
+\usepackage{tikz, tkz-euclide, tkz-fct}
+\usetikzlibrary{babel, matrix}
+\usetkzobj{all}
 
 % define o ambiente 'Exemplo' como 'example'
 \newtheorem{example}{Exemplo}
@@ -1612,14 +1613,166 @@ Assim, dada uma precisão $\varepsilon$, o vetor $X^{(k)}$ será escolhido como 
 	    Assim, $d^{(2)}=0,12$ e $d_r^{(2)}=\dfrac{0,12}{1,98}=0,0606>\varepsilon$, deve-se passar a proxima interação.
 	    
 	    \item \textbf{Terceira interação: }\hfill
+	    $$
+	    	x_1^{(3)}=\frac{7-(2x_2^{(2)}+x_3^{(2)})}{10}
+	    	=
+	    	\frac{7-(2(-1,98)+0,966)}{10}
+	    	=0,9994
+	    $$
+	    $$
+	    	x_2^{(3)}=\frac{-8-(x_1^{(2)}+x_3^{(2)})}{5}
+	    	=
+	    	\frac{-8-(0,978+0,966)}{5}
+	    	=-1,9888
+	    $$
+	    $$
+	    	x_3^{(3)}=\frac{6-(2x_1^{(2)}+3x_2^{(2)}}{10}
+	    	=
+	    	\frac{6-(2(0,978)+3(-1,98))}{10}
+	    	=0,9984
+	    	\text{,}
+	    $$
+	    onde tem-se $X^{(3)}=(0,9994;-1,9888;0,9984)^T$. Calculando os erros absolutos,
+	    \begin{itemize}
+	    	\item $|x_1^{(3)}-x_1^{(2)}| = |0,9994-0,978|=0,0214$.
+	    	\item $|x_2^{(3)}-x_2^{(2)}| = |-1,9888-(-1,98)|=0,0088$.
+	    	\item $|x_3^{(3)}-x_3^{(2)}| = |0,9984-0,966|=0,0324$.
+	    \end{itemize}
 	    
-	    \todo{Fazer terceira interação}.
+	    Assim, $d^{(3)}=0,0324$ e $d_r^{(3)}=\dfrac{0,0324}{1,9888}=0,0163<\varepsilon$, onde devido ao critério de parada, o procedimento deve se encerrar e a solução aproximada é
+	    $$
+	    	\overline{x}=\begin{bmatrix}
+	    		0,9994\\
+	    		-1,9888\\
+	    		0,9984
+	    	\end{bmatrix}
+	    	\text{.}
+	    $$
 	\end{itemize}
 \end{proof}
 
 
+\section{Programação Linear}
 
+Programação Linear é uma técnica de programação matemática utilizada para otimizar uma função linear de variáveis, chamada função objetiva, sujeita a um conjunto de inequações lineares chamadas restrições. A formulação do problema a ser resolvido segue as etapas
+\begin{enumerate}
+    \item Determinação das variáveis de decisão.
+    \item Determinação da função objetivo.
+    \item Determinação das restrições.
+    \item Construção do modelo matemático.
+\end{enumerate}
 
+\begin{example}
+	\label{example:prog_lin:papelAB}
+    Uma empresa produz dois tipos de papel e para isso utiliza somente uma máquina. Por causa de certas restrições de matéria-prima, não se pode produzir mais do que 4 toneladas/dia de papel do tipo A e não mais do que 6 toneladas/dia do papel do tipo B. Sabe-se que o tempo máximo de utilização dessa máquina é de 8 horas/dia e que para produzir 1 tonelada de papel do tipo A ou B a máquina leva 1 hora. O lucro por tonelada produzida de papel do tipo A é de R\$ 2,00 e de papel do tipo B é de R\$ 5,00. Quantas toneladas de cada tipo de papel deve-se produzir para que essa empresa tenha lucro máximo?
+\end{example}
+
+\begin{proof}[Solução]
+	Construindo o modelo matemático a partir do exemplo.\hfill
+    \begin{enumerate}
+        \item \textbf{Variáveis de decisão}:\hfill
+            \begin{itemize}
+                \item $x_1$: quantidade produzida de papel do tipo A.
+                \item $x_2$: quantidade produzida de papel do tipo B.
+            \end{itemize}
+
+        \item \textbf{Função objetivo}:\hfill
+            $\max (2x_1 + 5x_2)$, pois o lucro por tonelada do papel A é de R\$ 2,00 e do B é de R\$ 5,00.
+
+        \item \textbf{Restrições}:\hfill
+            \begin{itemize}
+                \item $x_1 \leqslant 4$, pois não se pode produzir mais do que 4 toneladas/dia do papel A.
+                \item $x_2 \leqslant 6$, pois não se pode produzir mais do que 6 toneladas/dia do papel B.
+                \item $x_1 + x_2 \leqslant 8$, pois a máquina só pode ser utilizada por 8 horas/dia e para a produção de 1 tonelada do papel A ou B é gasto 1 hora.
+                \item $x_1$, $x_2 \geqslant 0$, pois a quantidade produzida do papel A ou B não podem ser negativas.
+            \end{itemize}
+
+        \item \textbf{Modelo matemático}:\\
+            $\max (2x_1 + 5x_2)$, sujeito a:
+            \begin{itemize}
+                \item $x_1 \leqslant 4$.
+                \item $x_2 \leqslant 6$.
+                \item $x_1 + x_2 \leqslant 8$.
+                \item $x_1$, $x_2 \geqslant 0$.
+            \end{itemize}
+    \end{enumerate}
+    
+    O exemplo será resolvido, a partir do modelo, durante o desenvolvimento dos métodos nas Subseções abaixo.
+\end{proof}
+
+\subsection{Método Gráfico}
+
+\begin{definition}
+    Região viável é o conjunto de pontos ou valores que as variáveis de decisão podem assumir de modo que todas as restrições são satisfeitas.
+\end{definition}
+
+\begin{remark}
+    A região viável é convexa.
+\end{remark}
+
+A solução ótima do problema deverá estar sobre um dos vértices da região viável.
+
+\begin{example}
+	Resolva o Exemplo \ref{example:prog_lin:papelAB} por meio do Método Gráfico.
+\end{example}
+
+\begin{proof}[Solução]\hfill
+
+	\begin{figure}[h]
+		\centering
+		\caption{Gráfico do Exemplo \ref{example:prog_lin:papelAB}}
+		\resizebox{0.7\textwidth}{!}{
+			\begin{tikzpicture}
+				\tkzInit[xmin=-1, xmax=9, ymin=-1, ymax=9]
+				% draw axis without ticks
+				\tkzDrawX[label=$x_1$]
+				\tkzLabelX[orig=false, label options={text=black, below left=3pt}]
+				\tkzDrawY[label=$x_2$]
+				\tkzLabelY[orig=false, label options={text=black, below left=3pt}]
+	
+				\tkzDefPoints{
+					-1/9/R_1_A,
+					9/-1/R_1_B,
+					-1/6/R_2_A,
+					9/6/R_2_B,
+					4/-1/R_3_A,
+					4/9/R_3_B}
+					
+				\tkzDrawSegment[color=black, line width=0.5mm](R_1_A, R_1_B)
+				\tkzDrawSegment[color=black, line width=0.5mm](R_2_A, R_2_B)
+				\tkzDrawSegment[color=black, line width=0.5mm](R_3_A, R_3_B)
+				\node at (9,-1.2) {$x_1+x_2\leqslant 8$};
+				\node at (4, 9.2) {$x_1\leqslant 4$};
+				\node at (9.8, 6) {$x_2\leqslant 6$};
+				\node at (0.8, -0.8) {$x_1 \geqslant 0$};
+				\node at (-1.5, 0.25) {$x_2 \geqslant 0$};
+				
+				\tkzDefPoints{
+					0/0/P_1,
+					4/0/P_2,
+					4/4/P_3,
+					2/6/P_4,
+					0/6/P_5}
+				\tkzFillPolygon[draw, fill=blue!50](P_1, P_2, P_3, P_4, P_5)
+				\tkzDrawPoints[size=15, fill=white](P_1, P_2, P_3, P_4, P_5)
+				\node at (2, 3) {$\text{Região Viável}$};
+			\end{tikzpicture}
+		}
+		\fonte{Elaborado pelo autor, 2019.}
+		\label{fig:regiao_viavel_grafico}
+	\end{figure}
+	
+	Os vértices da região viável, conforme a Figura \ref{fig:regiao_viavel_grafico}, são:
+	\begin{itemize}
+	    \item $(0, 0)$: $2x_1+5x_2=2\cdot 0+5\cdot 0=0\Longrightarrow$ lucro de R\$ 0,00.
+	    \item $(4, 0)$: $2\cdot 4 + 5\cdot 0 = 8 \Longrightarrow$ lucro de R\$ 8,00.
+	    \item $(4, 4)$: $2 \cdot 4 + 5\cdot 4 = 28 \Longrightarrow$ lucro de R\$ 28,00.
+	    \item $(2, 6)$: $2 \cdot 2 + 5\cdot 6 = 34\Longrightarrow$ lucro de R\$ 34,00.
+	    \item $(0, 6)$: $2 \cdot 0 + 5\cdot 6 = 30\Longrightarrow$ lucro de R\$ 30,00.
+	\end{itemize}
+	
+	Portanto, a solução ótima é $x_1=2$ e $x_2=6$. Logo, deve-se produzir 2 toneladas/dia de papel tipo A e 6 toneladas/dia de papel tipo B para obter lucro máximo de R\$ 34,00.
+\end{proof}
 
 \begin{apendicesenv}
 	\partapendices
