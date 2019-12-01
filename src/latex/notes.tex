@@ -1548,7 +1548,7 @@ Assim, dada uma precisão $\varepsilon$, o vetor $X^{(k)}$ será escolhido como 
     $$
 \end{example}
 
-\begin{proof}[Solução]
+\begin{solution}
 	\hfill
 	
 	\begin{itemize}
@@ -1649,10 +1649,10 @@ Assim, dada uma precisão $\varepsilon$, o vetor $X^{(k)}$ será escolhido como 
 	    	\text{.}
 	    $$
 	\end{itemize}
-\end{proof}
+\end{solution}
 
 
-\section{Programação Linear}
+\chapter{Programação Linear}
 
 Programação Linear é uma técnica de programação matemática utilizada para otimizar uma função linear de variáveis, chamada função objetiva, sujeita a um conjunto de inequações lineares chamadas restrições. A formulação do problema a ser resolvido segue as etapas
 \begin{enumerate}
@@ -1667,7 +1667,7 @@ Programação Linear é uma técnica de programação matemática utilizada para
     Uma empresa produz dois tipos de papel e para isso utiliza somente uma máquina. Por causa de certas restrições de matéria-prima, não se pode produzir mais do que 4 toneladas/dia de papel do tipo A e não mais do que 6 toneladas/dia do papel do tipo B. Sabe-se que o tempo máximo de utilização dessa máquina é de 8 horas/dia e que para produzir 1 tonelada de papel do tipo A ou B a máquina leva 1 hora. O lucro por tonelada produzida de papel do tipo A é de R\$ 2,00 e de papel do tipo B é de R\$ 5,00. Quantas toneladas de cada tipo de papel deve-se produzir para que essa empresa tenha lucro máximo?
 \end{example}
 
-\begin{proof}[Solução]
+\begin{solution}
 	Construindo o modelo matemático a partir do exemplo.\hfill
     \begin{enumerate}
         \item \textbf{Variáveis de decisão}:\hfill
@@ -1698,9 +1698,9 @@ Programação Linear é uma técnica de programação matemática utilizada para
     \end{enumerate}
     
     O exemplo será resolvido, a partir do modelo, durante o desenvolvimento dos métodos nas Subseções abaixo.
-\end{proof}
+\end{solution}
 
-\subsection{Método Gráfico}
+\section{Método Gráfico}
 
 \begin{definition}
     Região viável é o conjunto de pontos ou valores que as variáveis de decisão podem assumir de modo que todas as restrições são satisfeitas.
@@ -1716,7 +1716,7 @@ A solução ótima do problema deverá estar sobre um dos vértices da região v
 	Resolva o Exemplo \ref{example:prog_lin:papelAB} por meio do Método Gráfico.
 \end{example}
 
-\begin{proof}[Solução]\hfill
+\begin{solution}\hfill
 
 	\begin{figure}[h]
 		\centering
@@ -1772,7 +1772,321 @@ A solução ótima do problema deverá estar sobre um dos vértices da região v
 	\end{itemize}
 	
 	Portanto, a solução ótima é $x_1=2$ e $x_2=6$. Logo, deve-se produzir 2 toneladas/dia de papel tipo A e 6 toneladas/dia de papel tipo B para obter lucro máximo de R\$ 34,00.
-\end{proof}
+\end{solution}
+
+\section{Método Simplex}
+
+Um problema de programação linear está em sua forma padrão se tivermos uma maximização da função objetivo e se todas as restrições forem do tipo menor ou igual, bem como os termos constantes e variáveis de decisão não negativos, isto é:
+$$\max \{z=c_1 x_1+c_2 x_2+\cdots+c_n x_n\}\text{,}$$
+sujeito a:
+\begin{align*}
+    a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n & \leqslant b_1\\
+    a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n & \leqslant b_2\\
+    \vdots \hspace{100pt} & \vdots\\
+    a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n & \leqslant b_n
+\end{align*}
+com $x_1, x_2, \dots, x_n \geqslant 0$.
+
+O método simplex requer que todas as restrições de desigualdade de um modelo de programação linear sejam transformadas em restrições de igualdade através da introdução de uma nova variável ($s_k$) a cada restrição. Essas novas variáveis são chamadas de variáveis de folga.
+
+Assim, o problema passa a ter a seguinte forma:
+$$\max\{z=c_1 x_1 + c_2 x_2 + \cdots + c_n x_n \}\text{,}$$
+sujeito a:
+\begin{align*}
+    a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n + s_1 & = b_1\\
+    a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n + s_2 & = b_2\\
+    \vdots \hspace{100pt} & \vdots\\
+    a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n + s_m & = b_n
+\end{align*}
+com $x_1, x_2, \dots, x_n, s_1, s_2, \dots, s_m \geqslant 0$.
+
+Pode-se encontrar facilmente uma solução inicial para esse problema considerando $x_1=x_2=\cdots=x_n=0$, logo, $s_1=b_1,s_2=b_2,\dots,s_m=b_m$ e $z=0$. Entretanto, essa pode não ser a solução ótima, basta verificar se dado um incremento em qualquer uma das variáveis $x_i$ fará $z$ aumentar de valor.
+
+\begin{remark}
+    As variáveis que assumem valor nulo são ditas variáveis não básicas (VNB) e as que assumem valor não nulo são chamadas de variáveis básicas (VB). Essas variáveis podem se alternarem durante as etapas do método simplex.
+\end{remark}
+
+\subsection{Forma tabular do método simplex}
+
+Acrescentando as variáveis de folga $s_1, s_2, \dots, s_m$ às restrições e transformando a função objetivo em uma equação, tem-se:
+$$
+    z-c_1 x_1 - c_2 x_2 - \cdots - c_n x_n = 0
+    \text{,}
+$$
+sujeito a:
+\begin{align*}
+    a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n + s_1 & = b_1\\
+    a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n + s_2 & = b_2\\
+    \vdots \hspace{100pt} & \vdots\\
+    a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n + s_m & = b_n
+\end{align*}
+ou na forma tabular:
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		Base & $x_1$ & $x_2$ & $\cdots$ & $x_n$ & $s_1$ & $s_2$ & $\cdots$ & $s_m$ & Constante \\
+	    \hline
+	    $z$ & $-c_1$ & $-c_2$ & $\cdots$ & $c_n$ & 0 & 0 & $\cdots$ & 0 & 0\\
+	    \hline
+	    $s_1$ & $a_{11}$ & $a_{12}$ & $\cdots$ & $a_{1n}$ & 1 & 0 & $\cdots$ & 0 & $b_1$\\
+	    \hline
+	    $s_2$ & $a_{21}$ & $a_{22}$ & $\cdots$ & $a_{2n}$ & 0 & 1 & $\cdots$ & 0 & $b_2$\\
+	    \hline
+	    $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$\\
+	    \hline
+	    $s_m$ & $a_{m1}$ & $a_{m2}$ & $\cdots$ & $a_{mn}$ & 0 & 0 & $\cdots$ & 1 & $b_m$\\
+	    \hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Etapas do método simplex}
+
+\begin{enumerate}
+	\item Encontrar uma solução básica viável (origem);
+	
+	\item Verificar se a solução atual é ótima. Se for parar, senão, continuar (a solução é ótima se não existir coeficientes negativos na linha de $z$);
+	
+	\item Determinar a VNB que deve entrar na base (será aquela que possui coeficiente "mais negativo" na linha $z$);
+	
+	\item Determinar a VB que deve sair da base (será aquela que corresponder com o menor valor não negativo de $\dfrac{b_i}{a_{ij}}$, sendo $j$ o índice da variável que entra na base);
+	
+	\item Encontrar a nova solução básica viável através de modificações algébricas na forma tabular e voltar a etapa 2.
+\end{enumerate}
+
+\begin{example}
+    Resolva o problema de programação linear a seguir pelo método simplex tabular:
+    $$\max\{5x_1+2x_2\}\text{,}$$
+    sujeito a:
+    \begin{align*}
+        x_1  & \leqslant 3\\
+        x_2  & \leqslant 4\\
+        x_1 + 2x_2 & \leqslant 9
+    \end{align*}
+    com $x_1, x_2\geqslant 0$.
+\end{example}
+
+\begin{solution}\hfill
+	\begin{itemize}
+		\item \textbf{Adicionando as variáveis de folga}, o problema passa a ser:
+		$$z-5x_1+2x_2=0\text{,}$$
+		sujeito a:
+		\begin{align*}
+			x_1 + s_1 & = 3\\
+			x_2 + s_2 & = 4\\
+			x_1 + 2x_2 + s_3 & = 9
+		\end{align*}
+		com $x_1, x_2, s_1, s_2, s_3 \geqslant 0$.
+		
+		\item \textbf{Na forma tabular}, tem-se
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				Base & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & Constante \\
+		        \hline
+		        $z$ & -5 & 2 & 0 & 0 & 0 & 0\\
+		        \hline
+		        $s_1$ & 1 & 0 & 1 & 0 & 0 & 3\\
+		        \hline
+		        $s_2$ & 0 & 1 & 0 & 1 & 0 & 4\\
+		        \hline
+		        $s_3$ & 1 & 2 & 0 & 0 & 1 & 9\\
+		        \hline
+			\end{tabular}
+		\end{table}
+		
+		\begin{itemize}
+			\item $x_1$ é a variável que entra pois seu coeficiente é o mais negativo (-5);
+			
+			\item Calcular $\dfrac{b_i}{a_{ij}}$, com $j=1$ e $i=1,2$ e $3$: 
+			$$\left \{ \dfrac{b1}{a_{11}}=\dfrac{3}{1}=1\text{; } \dfrac{b_2}{a_{21}}=\dfrac{4}{0}\text{(Descartada); } \dfrac{b_3}{a_{31}}=\dfrac{9}{1}=9 \right \}\text{.}$$
+			
+			Como $3$ é o menor valor não negativo, $S_1$ deve sair.
+		\end{itemize}
+		
+		\begin{remark}
+			A coluna da variável que entra é chamada de coluna pivô. A linha da variável que sai é chamada de linha pivô. O elemento que pertence a coluna pivô e a linha pivô simultâneamente é chamado elemento pivô. Neste exemplo ele é igual a 1.
+		\end{remark}
+		
+		\item \textbf{Modificações algébricas:}
+		
+		\begin{itemize}
+			\item \textbf{Na linha pivô:} $\text{novo valor}=\dfrac{\text{antigo valor}}{\text{elemento pivô}}$:
+			$$
+			    \left \{
+			        \dfrac{1}{1}=1\text{, }
+			        \dfrac{0}{1}=0\text{, }
+			        \dfrac{1}{1}=1\text{, }
+			        \dfrac{0}{1}=0\text{, }
+			        \dfrac{0}{1}=0\text{, }
+			        \dfrac{3}{1}=3
+			    \right \}\text{.}
+			$$
+			
+			\item \textbf{Nas outras linhas:}
+			$$
+			    \text{novo valor} =\text{antigo valor} - \left (
+			        \substack{\text{coeficiente correspondente}\\\text{na coluna pivô}}
+			        \times
+			        \substack{\text{novo valor da}\\\text{linha pivô}}
+			    \right )
+			$$
+			
+			\item Na linha $z$:
+			\begin{itemize}
+				\item $-5-(-5\times 1)=-5+5=0$.
+				\item $-2-(-5\times 0)=-2+0=-2$.
+				\item $0-(-5\times 1)=5$.
+				\item $0-(-5\times 0)=0$.
+				\item $0-(-5\times 0)=0$.
+				\item $0-(-5\times 3)=15$.
+			\end{itemize}
+			
+			\item Na linha $s_2$:
+			\begin{itemize}
+				\item $0-(0\times 1)=0$.
+				\item $1-(0\times 0)=1$.
+				\item $0-(0\times 1)=0$.
+				\item $1-(0\times 0)=1$.
+				\item $0-(0\times 0)=0$.
+				\item $4-(0\times 3)=4$.
+			\end{itemize}
+			
+			\item Na linha $s_3$:
+			\begin{itemize}
+				\item $1-(1\times 1)=0$.
+				\item $2-(1\times 0)=2$.
+				\item $0-(1\times 1)=-1$.
+				\item $0-(1\times 0)=0$.
+				\item $1-(1\times 0)=1$.
+				\item $9-(1\times 3)=6$.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{itemize}		
+		\item \textbf{Na forma tabular:}
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				Base & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & Constante \\
+		        \hline
+		        $z$ & 0 & -2 & 5 & 0 & 0 & 15\\
+		        \hline
+		        $x_1$ & 1 & 0 & 1 & 0 & 0 & 3\\
+		        \hline
+		        $s_2$ & 0 & 1 & 0 & 1 & 0 & 4\\
+		        \hline
+		        $s_3$ & 0 & 2 & -1 & 0 & 1 & 6\\
+		        \hline
+			\end{tabular}
+		\end{table}
+			
+		O processo deve continuar pois ainda existem coeficientes negativos na linha de $z$.
+		
+		\begin{itemize}
+			\item A variável que entra é $x_2$.
+			
+			\item Calculando $\dfrac{b_i}{a_{ij}}$, para $j=2$ e $i=1,2$ e $3$:
+			$$
+			    \left \{
+			        \dfrac{b_1}{a_{12}}=\dfrac{3}{0}\text{(Descartado); }
+			        \dfrac{b_2}{a_{22}}=\dfrac{4}{1}=4\text{; }
+			        \dfrac{b_3}{a_{32}}=\dfrac{6}{2}=3
+			    \right \}\text{.}
+			$$
+			Assim, a variável que sai é $s_3$.
+			
+			\item Fazendo as modificações algébricas na linha do pivô, $x_2$:
+			$$
+			    \left \{
+			        \dfrac{0}{2}=0\text{, }
+			        \dfrac{2}{2}=1\text{, }
+			        \dfrac{-1}{2}=-\dfrac{1}{2}\text{, }
+			        \dfrac{0}{2}=0\text{, }
+			        \dfrac{1}{2}=\dfrac{1}{2}\text{, }
+			        \dfrac{6}{2}=3
+			    \right \}\text{.}
+			$$
+			
+			\item Fazendo as modificações algébricas na linha $z$:
+			\begin{itemize}
+				\item $0-(-2\times 0)=0$.
+				\item $-2-(-2\times 1)=0$.
+				\item $5-(-2\times(-\frac{1}{2}))=4$.
+				\item $0-(-2\times 0)=0$.
+				\item $0-(-2\times \frac{1}{2})=1$.
+				\item $15-(-2\times 3)=21$.
+			\end{itemize}
+			
+			\item Fazendo as modificações algébricas na linha $x_1$:
+			\begin{itemize}
+				\item $1-(0\times 0)=1$.
+				\item $0-(0\times 1)=0$.
+				\item $1-(0\times (-\frac{1}{2}))=1$.
+				\item $0-(0\times 0)=0$.
+				\item $0-(0\times \frac{1}{2})=0$.
+				\item $3-(0\times 3)=3$.
+			\end{itemize}
+			
+			\item Fazendo as modificações algébricas na linha $s_2$:
+			\begin{itemize}
+				\item $0-(1\times 0)=0$.
+				\item $1-(1\times 1)=0$.
+				\item $0-(1\times (-\frac{1}{2}))=\frac{1}{2}$.
+				\item $1-(1\times 0)=1$.
+				\item $0-(1\times \frac{1}{2})=-\frac{1}{2}$.
+				\item $4-(1\times 3)=1$.
+			\end{itemize}
+		\end{itemize}
+		
+		\item \textbf{Na forma tabular:}
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				Base & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $s_3$ & Constante \\
+		        \hline
+		        $z$ & 0 & 0 & 4 & 0 & 1 & 21\\
+		        \hline
+		        $x_1$ & 1 & 0 & 1 & 0 & 0 & 3\\
+		        \hline
+		        $s_2$ & 0 & 0 & $\frac{1}{2}$ & 1 & $-\frac{1}{2}$ & 1\\
+		        \hline
+		        $x_2$ & 0 & 1 & $-\frac{1}{2}$ & 0 & $\frac{1}{2}$ & 3\\
+		        \hline
+			\end{tabular}
+		\end{table}
+	\end{itemize}
+		
+	Como todos os coeficientes da linha $z$ são não negativos, temos a solução ótima, dada por:
+	$$x_1=3\text{, }x_2=3\text{, }s_1=0\text{, }s_2=1\text{, }s_3=0\text{ e }z=21\text{.}$$
+	
+	\begin{remark}
+	    A variável $s_2=1$, neste exemplo, mostra que a equação onde ela foi introduzida $x_2+s_2=4$ tem uma folga de 1 únidade. Nas demais equações não existe folga como pode ser conferido.
+	\end{remark}
+\end{solution}
+
+\begin{remark}
+    Uma maneira de verificar uma inconsistência nos cálculos da tabela é verificar se:
+    \begin{enumerate}
+        \item houve melhora na constante da função objetivo ($z$);
+        \item todas as colunas referentes as variáveis básicas contêm apenas zeros e uns. O valor 1 deve aparecer uma única vez no encontro da linha e coluna de cada uma das variáveis básicas.
+    \end{enumerate}
+\end{remark}
+
+\section{Exercícios}
+
+\begin{enumerate}
+	\item Uma indústria produz dois tipos de motores. O motor do tipo A requer 2 horas de montagem e 3 horas de teste e é vendido com um lucro de R\$ 250,00. O motor do tipo B requer 1 hora de montagem e 2 horas de teste, sendo vendido com um lucro de R\$ 150,00. Considerando que essa indústria tem disponível 90 horas de tempo de montagem e 140 horas de tempo de teste por dia para a produção desses motores, quantos motores do tipo A e do tipo B ela deve produzir por dia para maximizar seu lucro?
+	\begin{enumerate}
+	    \item resolva utilizando o método gráfico.
+	
+	    \item resolva utilizando o método simplex tabular.
+	\end{enumerate}
+\end{enumerate}
 
 \begin{apendicesenv}
 	\partapendices

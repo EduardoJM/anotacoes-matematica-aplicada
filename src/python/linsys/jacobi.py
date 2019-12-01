@@ -20,7 +20,7 @@ def solve_system(mA, mb, approx, maxError, maxIterations):
         maxIterations = 100
     error = 0
     error_rel = 0
-    iterations = 0
+    iterations = 1
     lastSolution = approx
     solution = []
     while True:
@@ -54,10 +54,10 @@ def solve_system(mA, mb, approx, maxError, maxIterations):
     }
     
 A = [
-    [10, 2, 1],
-    [1, 5, 1],
-    [2, 3, 10]
+    [10, 1, -1],
+    [1, 10, 1],
+    [2, -1, 10]
 ]
-b = [7, -8, 6]
+b = [10, 12, 11]
 
-print(solve_system(A, b, [0.7, -1.6, 0.6], 0.05, 10))
+print(solve_system(A, b, [0, 0, 0], 0.02, 10))
