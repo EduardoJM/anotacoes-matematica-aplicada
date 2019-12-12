@@ -23,6 +23,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{graphicx}
+\usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{mdframed}
 \usepackage{indentfirst}
@@ -206,6 +207,22 @@
 \local{Goiás}
 \instituicao{Nome da instituição}
 
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
 
 \begin{document}
 \frenchspacing
@@ -218,64 +235,18 @@
 \vspace{0.5cm}
 \huge
 \raggedright
-\imprimirautor\\
-\vspace{2.5cm}
-\huge 
+%\imprimirautor\\
+%\vspace{2.5cm}
+\vfill
+\Huge
 {\raggedleft
 %\includegraphics[scale=0.9]{abntex2-modelo-img-marca.pdf}\\[1cm]
-\textit{\textcolor{blue}{\imprimirtitulo}}\\[1cm]
+\textit{{\imprimirtitulo}}\\[1cm]
 }
 \centering 
 \vfill
-\Large
-\imprimirinstituicao
 \end{titlingpage}
 % ---
-
-% ---
-% Contra-capa
-% ---
-\begin{titlingpage}
-
-\phantom{xxx}
-\vspace{0.5cm}
-\huge
-\raggedright
-\imprimirautor\\
-\vspace{2.5cm}
-\huge 
-{\raggedleft
-%\includegraphics[scale=0.9]{abntex2-modelo-img-marca.pdf}\\[1cm]
-\textit{\textcolor{blue}{\imprimirtitulo}}\\[1cm]
-}
-\centering 
-% %este é um símbolo que só aparecerá com a fonte Minion.
-\vfill
-\Large
-% %este é um símbolo que só aparecerá com a fonte Minion.
-\imprimirinstituicao
-% ---
-
-% ---
-% Verso da contra-capa
-% ---
-\clearpage
-\ABNTEXfontereduzida
-%\raggedright
-© 2019 \imprimirautor
-
-Qualquer parte desta publicação pode ser reproduzida, desde que citada a fonte.
-\vspace*{\fill}
-
-\end{titlingpage}
-
-\pdfbookmark[0]{\listfigurename}{lof}
-\listoffigures*
-\cleardoublepage
-
-\pdfbookmark[0]{\listtablename}{lot}
-\listoftables*
-\cleardoublepage
 
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
@@ -283,11 +254,6 @@ Qualquer parte desta publicação pode ser reproduzida, desde que citada a fonte
 
 
 \mainmatter
-
-\chapter*[Introdução]{Introdução}
-\addcontentsline{toc}{chapter}{Introdução}
-
-\todo{Escrever a introdução.}
 
 \chapter{Conceitos Iniciais}
 
@@ -385,16 +351,6 @@ Todo esse processo de conversão de base pode se constituir em uma fonte de erro
 	$$=0,003815+0=0,003815\text{.}$$
 \end{solution}
 
-
-\section{Exercícios}
-
-\begin{enumerate}
-    \item Cite as fases e os principais erros na resolução de um problema. Defina as fases.
-    
-    \item Considere os seguintes valores $x_1=0,00005183$ e $x_2=9876543210$. Utilizando uma calculadora científica (tipo Casio fx-82MS) no formato de exibição \textbf{Norm1} calcule as seguintes operações: $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Repita os cálculos usando \textbf{Norm 2}. Compare os resultados.
-\end{enumerate}
-
-
 \chapter{Representando Números}
 
 Em geral, um número real $x$ na base $\beta$ é representado por
@@ -424,6 +380,18 @@ De fato, no sistema decimal temos que $\beta=10$ e $a_i$ e $b_j$ elementos do co
 \begin{example}
 	Escreva a representação dos seguintes números:
 	\begin{enumerate}
+	    \item $x=(1984)_{10}$.
+	    \item $x=(15,47)_{10}$.
+    	\item $x=(0,362)_{10}$.
+    	\item $x=(1011)_{2}$.
+    	\item $x=(11,01)_{2}$.
+    	\item $x=(0,110)_{2}$.
+    	\item $x=(1572)_{8}$.
+    	\item $x=(0,1)_{4}$.
+	\end{enumerate}
+\end{example}
+\begin{solution}\hfill
+	\begin{enumerate}
   		% exemplo 1
 	    \item $x=(1984)_{10}$ = $1\cdot 10^3 + 9\cdot 10^2 + 8\cdot 10^1 + 4\cdot 10^0$.
     	% exemplo 2
@@ -441,7 +409,7 @@ De fato, no sistema decimal temos que $\beta=10$ e $a_i$ e $b_j$ elementos do co
 	    % exemplo 8
     	\item $x=(0,1)_{4}$ = $0\cdot 4^0 + 1 \cdot 4^{-1}$.
 	\end{enumerate}
-\end{example}
+\end{solution}
 
 \section{Conversão de Bases}
 
@@ -452,6 +420,14 @@ Para converter da base binária para a base decimal, basta multiplicar o dígito
 \begin{example}
     Converta os seguintes números para a base decimal:
     \begin{enumerate}
+        \item $(101101)_{2}$.
+        \item $(1011,110)_{2}$.
+        \item $(1251)_{8}$.
+        \item $(0,1)_{4}$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
+    \begin{enumerate}
         % exemplo a
         \item $(101101)_{2}$ = $1\cdot 2^5 + 0\cdot 2^4 + 1 \cdot 2^3 + 1 \cdot 2^2 + 0\cdot 2^1 + 1\cdot 2^0$, ou seja, $(101101)_{2} = 32 + 0 + 8 + 4 + 0 + 1 = 45$. Portanto, $(101101)_{2}=(45)_{10}$.
         % exemplo b
@@ -461,7 +437,7 @@ Para converter da base binária para a base decimal, basta multiplicar o dígito
         % exemplo d
         \item $(0,1)_{4}$ = $0\cdot 4^0 + 1 \cdot 4^{-1}=(0,25)_{10}$.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \subsection{Decimal para Binário}
 
@@ -470,6 +446,7 @@ Para a conversão de um número na base 10 para a base 2, utiliza-se um processo
 Para converter a parte inteira, utiliza-se o processo das divisões sucessivas, que consiste em dividir a parte inteira do número por 2. A seguir, divide-se por 2 o quociente encontrado e assim o processo é repetido até que o último quociente seja igual a 1. 
 
 O número binário será formado pela concatenação dos restos das divisões lidos em sentido inverso a que foram obtidos com o número 1 (último quociente) sendo o primeiro digito desse número, isto é:
+\newpage
 
 \begin{figure}[h]
 	\centering
@@ -481,6 +458,13 @@ Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
 \begin{example}
 	Converta os seguintes números para binário
 	\begin{enumerate}
+	    \item $(17)_{10}$.
+	    \item $(26)_{10}$.
+    	\item $(100)_{10}$.
+	\end{enumerate}
+\end{example}
+\begin{solution}\hfill
+	\begin{enumerate}
 	    \item $(17)_{10}$.\hfill
 	    	\begin{figure}[h]
 	    		\centering
@@ -488,7 +472,6 @@ Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
 	    	\end{figure}
 	    	
 	    	Logo, $(17)_{10}=(10001)_{2}$.
-	    	\newpage
 	    	
 	    \item $(26)_{10}$.\hfill
 	    	\begin{figure}[h]
@@ -497,6 +480,7 @@ Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
 	    	\end{figure}
 	    	
 	    	Logo, $(26)_{10}=(11010)_{2}$.
+			\newpage
     	\item $(100)_{10}$.\hfill
     		\begin{figure}[h]
     			\centering
@@ -505,22 +489,24 @@ Logo, tem-se que $(N)_{10}=(1r_n r_{n-1}\cdots r_3 r_2 r_1)$.
     		
     		Logo, $(100)_{10}=(1100100)_{2}$.
 	\end{enumerate}
-\end{example}
+\end{solution}
 
 Para converter a parte fracionária de um número na base 10 para a base 2, utiliza-se o processo das multiplicações sucessivas. Multiplica-se a parte fracionária por 2, deste resultado, a parte inteira será o primeiro dígito (após a vírgula) do número binário e a parte fracionária será novamente multiplicada por 2. Desse resultado, a parte inteira será o segundo dígito do número binário e a parte fracionada será multiplicada novamente por 2. Repete-se esse processo até que a parte fracionada do último produto seja igual a zero, no caso do número ter representação finita.
 
 \begin{example}
     Converta os números a seguir para a base binária.
     \begin{enumerate}
+        \item $(0,125)_{10}$.
+        \item $(0,185)_{10}$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
+	\begin{enumerate}
         \item $(0,125)_{10}$. Como $0,125\cdot 2 = 0,25$, o primeiro dígito é 0. Ainda, $0,25\cdot 2=0,5$, logo, o segundo dígito é 0. $0,5\cdot 2=1$, donde o terceiro dígito é $1$. Logo, $(0,125)_{10}=(0,001)_{2}$.
         
         \item $(0,185)_{10}$. Como $0,185\cdot 2=0,37$, o primeiro dígito é 0. Ainda, $0,37\cdot 2=0,74$, o segundo dígito é 0. $0,74\cdot 2=1,48$, donde o terceiro dígito é 1. $0,48\cdot 2=0,96$, donde o quarto dígito é 0. $0,96\cdot 2=1,92$, onde o quinto dígito é 1. $0,92\cdot 2=1,84$, donde o sexto dígito é $1$. $0,84\cdot 2=1,68$, então o setimo dígito é 1. Como a parte fracionária irá sempre se reptir, sua representação binária é infinita, então $(0,185)_{10}=(0010111\dots)_{2}$.
-
-        \item $(13,25)_{10}$ \todo{fazer a resolução}
-
-        \item $(3,8)_{10}$ \todo{fazer a resolução}
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \section{Aritmética de Ponto Flutuante}
 
@@ -537,6 +523,19 @@ Em geral, $m=-M$. Se $d_1\neq 0$, caracteriza o sistema em ponto finalmente norm
 \begin{example}
     Represente os números a seguir num sistema de aritmética de ponto flutuante (normalizado).
     \begin{enumerate}
+    	\item $(5720)_{10}$.
+	    \item $(90621)_{10}$.
+    	\item $(51,734)_{10}$.
+	    \item $(0,00913)_{10}$.
+    	\item $(-0,0001)_{10}$.
+	    \item $(101101)_{2}$.
+    	\item $(110,101)_{2}$.
+	    \item $(0,01101)_{2}$.
+    	\item $(-0,0001001)_{2}$.
+	\end{enumerate}
+\end{example}
+\begin{solution}\hfill
+	\begin{enumerate}
     	\item $(5720)_{10}$ = $0.5720\cdot 10^4$.
 	    \item $(90621)_{10}$ = $0.90621\cdot 10^5$.
     	\item $(51,734)_{10}$ = $0.51734\cdot 10^2$.
@@ -547,12 +546,21 @@ Em geral, $m=-M$. Se $d_1\neq 0$, caracteriza o sistema em ponto finalmente norm
 	    \item $(0,01101)_{2}$ = $0.1101\cdot 2^{-1}$.
     	\item $(-0,0001001)_{2}$ = $-0.1001\cdot 2^{-3}$ e, convertendo 3 para a base binária, tem-se $-0.1001\cdot 2^{-11}$.
 	\end{enumerate}
-\end{example}
+\end{solution}
 
 Um número não poderá ser representado na maquina com sistema de aritmética do ponto flutuante se o expoente $e$ estiver fora do intervalo $[m, M]$. A maquina acusará o erro de \textit{underflow} se $e < m$ e de \textit{overflow} se $e>M$.
 
 \begin{example}
     Considere uma maquina que opera no sistema de aritmetica de ponto flutuante com $\beta=10$, $t=3$ e $e\in [-2, 2]$. Represente neste sistema os seguintes números decimais.
+	\begin{enumerate}
+        \item $0,35$.
+        \item $-5,172$.
+        \item $0,0123$.
+        \item $5391,3$.
+        \item $0,0003$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
     \begin{enumerate}
         \item $0,35 = 0.350\cdot 10^0$
         \item $-5,172 = -0.517\cdot 10^1$
@@ -560,7 +568,7 @@ Um número não poderá ser representado na maquina com sistema de aritmética d
         \item $5391,3 = 0.539\cdot 10^4$, como 4 não está no intervalo entre -2 e 2, $4 > 2$, a maquina acusará o erro de overflow.
         \item $0,0003 = 0.3\cdot 10^{-3}$, como 3 não está no intervalo entre -2 e 2, $-3 < -2$, a maquina acusará o erro de underflow.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \begin{remark}
 	Algumas linguagens computacionais permitem trabalhar em precisão dupla, que é o mesmo sistema de aritmética de ponto flutuante, mas com o dobro de dígitos disponíveis na mantissa. Vale lembrar que nesse caso, o tempo de execução e a memória usada aumentam significativamente.
@@ -572,27 +580,43 @@ $$F(\beta, t, m, M)\text{.}$$
 \begin{example}
     Dado o sistema de aritmética de ponto flutuante $F(10, 3, -4, 4)$, represente os seguintes números decimais nesse sistema:
     \begin{enumerate}
+        \item $1,35$.
+        \item $-279,15$.
+        \item $0,024712$.
+        \item $10,13$.
+    \end{enumerate}
+\end{example}
+\begin{solution}
+    \begin{enumerate}
         \item $1,35$ = $0.135\cdot 10^1$.
         \item $-279,15$ = $-0.279\cdot 10^3$.
         \item $0,024712$ = $0.247\cdot 10^{-1}$.
         \item $10,13$ = $0.101\cdot 10^2$.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \begin{example}
     Dado $F(2, 10, -15, 15)$ represente os seguintes números nesse sistema de aritmética de ponto flutuante:
+    \begin{enumerate}
+        \item $(11001)_2$.
+        \item $(45)_{10}$.
+        \item $(-7,125)_{10}$.
+	\end{enumerate}
+\end{example}
+\begin{solution}\hfill
     \begin{enumerate}
         \item $(11001)_2 = 0.1100100000\cdot 2^{101}$.
         \item $(45)_{10} = (101101)_2 = 0.1011010000\cdot 2^{110}$.
         \item $(-7,125)_{10} = (-111,001)_2 = -0.1110010000\cdot 2^{-11}$.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \begin{example}
     Considere o sistema $F(2, 3, -1, 2)$. Quantos e quais números podem ser representados neste sistema?
-
-    São os números $\pm 0.100\cdot 2^e$, $\pm 0.110\cdot 2^e$, $\pm 0.101\cdot 2^e$, $\pm 0.111 \cdot 2^e$, onde $e \in [-1, 2]$. Como temos 4 possibilidades para $e$, são 32 números nesse formato, extendendo ao zero, 33.
 \end{example}
+\begin{solution}
+    São os números $\pm 0.100\cdot 2^e$, $\pm 0.110\cdot 2^e$, $\pm 0.101\cdot 2^e$, $\pm 0.111 \cdot 2^e$, onde $e \in [-1, 2]$. Como temos 4 possibilidades para $e$, são 32 números nesse formato, extendendo ao zero, 33.
+\end{solution}
 
 \begin{remark}
     Sabemos que os números reais podem ser representados por uma reta contínua. Entretanto, em ponto flutuante podemos representar apenas pontos discretos na reta real.
@@ -601,11 +625,18 @@ $$F(\beta, t, m, M)\text{.}$$
 \begin{example}
     Considerando, ainda, o sistema do exemplo anterior $F(2, 3, -1, 2)$, represente os seguintes números:
     \begin{enumerate}
+        \item $(0,38)_{10}$.
+        \item $(0,375)_{10}$.
+        \item $(5,3)_{10}$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
+    \begin{enumerate}
         \item $(0,38)_{10} = (0,0110110\dots)_2=0.110\cdot 2^{-1}$.
         \item $(0,375)_{10} = (0.110)_2 = 0.110\cdot 2^{-1}$.
         \item $(5,3)_{10} = (101,01001\dots)_2 = 0.101\cdot 2^{11}$. Mas como o expoente é limitado entre -1 e 2 (decimais), o número seria um caso de overflow.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \subsection{Representação de um número na máquina}
 
@@ -637,7 +668,7 @@ Observando a representação na tabela a seguir, o local marcado como 1 represen
 	\end{tikzpicture}
 \end{figure}
 
-\begin{example}
+\begin{example}\hfill
 	\begin{enumerate}
 		\item O número $(25)_{10} = (11001)_2 = 0.11001\cdot 2^{101}$ pode ser representado como:
 		\begin{tablePontoFlutuante16bits}
@@ -652,7 +683,7 @@ Observando a representação na tabela a seguir, o local marcado como 1 represen
 			1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
 			};
 		\end{tablePontoFlutuante16bits}
-		\newpage
+
 		\item O número $(0,1)_{10}=(0,000110011\dots)_2 = 0.1100110011\cdot 2^{-11}$ pode ser representado como:
 		\begin{tablePontoFlutuante16bits}
 			{
@@ -673,7 +704,12 @@ Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \b
 
 \begin{example}
     Utilizando truncamento e arredondamento passe os números a seguir para 4 casas decimais:
-
+	\begin{enumerate}
+        \item $x=0.77712345\cdot 10^3$.
+        \item $y=0.86537\cdot 10^{-5}$.
+	\end{enumerate}
+\end{example}
+\begin{solution}\hfill
     \begin{enumerate}
         \item $x=0.77712345\cdot 10^3$.
         	\begin{itemize}
@@ -686,13 +722,20 @@ Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \b
 			    \item Truncamento: $\overline{y}=0.8653\cdot 10^{-5}$.
 			    \item Arredondamento: $\overline{y}=0.8654\cdot 10^{-5}$.
 			\end{itemize}
-			
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \begin{example}
     Considere o sistema $F(10,3,-5,5)$. Represente os seguintes números nesse sistema utilizando truncamento e arredondamento.
-
+    \begin{enumerate}
+    	\item $x=1234,56$.
+    	\item $y=-0,00054962$.
+    	\item $z=0,9995$.
+    	\item $w=123456,7$.
+    	\item $v=-0,0000001$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
     \begin{enumerate}
         \item $x=1234,56$.
 	        \begin{itemize}
@@ -718,7 +761,7 @@ Seja $x$ um número decimal na forma $0.d_1 d_2 \dots d_t d_{t+1} \dots \cdot \b
         \item $v=-0,0000001$.\\
         	$v=-0.1\cdot 10^{-6}$. Erro de underflow.
     \end{enumerate}
-\end{example}
+\end{solution}
 
 \section{Erro Absoluto e Relativo}
 
@@ -739,21 +782,24 @@ onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
 
 \begin{example}
     Considere o número $9,4318$ e uma máquina que opera apenas com 3 dígitos. Qual o erro absoluto cometido por essa máquina para representar esse número?
-
-    $x=9,4318 \Longrightarrow \overline{x}=9,43$. Assim, $|EA_x|=|x-\overline{x}|$, ou seja, $|EA_x|=|9,4318-9,43|=0,0018$ ou ainda $0.180\cdot 10^{-2}$.
 \end{example}
+\begin{solution}
+    $x=9,4318 \Longrightarrow \overline{x}=9,43$. Assim, $|EA_x|=|x-\overline{x}|$, ou seja, $|EA_x|=|9,4318-9,43|=0,0018$ ou ainda $0.180\cdot 10^{-2}$.
+\end{solution}
 
 \begin{example}
     Sabendo-se que $\pi \in (3,14; 3,15)$. Determine o erro absoluto que se pode cometer ao escolher um valor desse intervalo para $\pi$.
-
-    $|EA_{\pi}|=|\pi-\overline{\pi}|<0,01$ ou, ainda, $0.1\cdot 10^{-1}$.
 \end{example}
+\begin{solution}
+    $|EA_{\pi}|=|\pi-\overline{\pi}|<0,01$ ou, ainda, $0.1\cdot 10^{-1}$.
+\end{solution}
 
 \begin{example}
     Seja $x$ um número representado por $\overline{x}=7,3$ de tal forma que $|EA_x|<0,1$. Determine o menor intervalo que contenha $x$.
-
-    O intervalo é dado por $(7,3-|EA_x|;7,3+|EA_x|)$ que é $(7,3-0,1;7,3+0,1)$, isto é, $(7,2;7,4)$.
 \end{example}
+\begin{solution}
+    O intervalo é dado por $(7,3-|EA_x|;7,3+|EA_x|)$ que é $(7,3-0,1;7,3+0,1)$, isto é, $(7,2;7,4)$.
+\end{solution}
 
 \subsection{Erro Relativo}
 
@@ -768,6 +814,8 @@ onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
 
 \begin{example}
     Considere o número 9,4318 e o seu valor aproximado 9,43. Calcule o erro relativo cometido nessa aproximação.
+\end{example}
+\begin{solution}
     $$
         |ER_x|
         =\frac{|9,4318-9,43|}{|9,43|}
@@ -777,25 +825,32 @@ onde $x$ é o valor exato e $\overline{x}$ é o valor aproximado.
         \text{,}
     $$
     ou, em ponto flutuante, $0.2\cdot 10^{-3}$.
-\end{example}
+\end{solution}
 
 \begin{remark}
     Dependendo da ordem de grandeza dos números envolvidos, o erro absoluto não é suficiente para descrever a precisão de um cálculo. Por esta razão, o erro relativo é amplamente empregado.
 \end{remark}
 
-\begin{example}
-    Considere o número $x$ representado por $\overline{x}=2112,9$ de tal forma que $|EA_x|<0,1$, ou seja, $x \in (2112,8; 2113)$ e o número $y$ representado por $\overline{y}=5,3$ de tal forma que $|EA_y|<0,1$, ou seja, $y\in (5,2; 5,4)$. Qual dos números $x$ ou $y$ estão representados com maior precisão?
+\subsection{Exercícios}
 
-    \todo{resolver o exemplo}
-\end{example}
+\begin{enumerate}
+    \item Considere o número $x$ representado por $\overline{x}=2112,9$ de tal forma que $|EA_x|<0,1$, ou seja, $x \in (2112,8; 2113)$ e o número $y$ representado por $\overline{y}=5,3$ de tal forma que $|EA_y|<0,1$, ou seja, $y\in (5,2; 5,4)$. Qual dos números $x$ ou $y$ estão representados com maior precisão?
+\end{enumerate}
 
 \section{Operações Aritméticas em Ponto Flutuante}
 
 Considere uma máquina qualquer e uma série de operações aritméticas. Pelo fato do arredondamento (truncamento) ser feito após cada operação, temos, ao contrário do que é valido para números reais, que as operações aritméticas não são nem associativas e nem distributivas.
 
 \begin{example}
+	\label{exemplo:ex_anterior}
     Considere um sistema com base $\beta = 10$ e $t=3$ dígitos significativos e efetue as operações a seguir utilizando arredondamento.
-
+    \begin{enumerate}
+        \item $(11,4+3,18)+5,05$ e $11,4+(3,18+5,05)$.
+        \item $\dfrac{(3,18\cdot 11,4)}{5,05}$ e $\left ( \dfrac{3,18}{5,05} \right) \cdot 11,4$.
+        \item $3,18\cdot (5,05+11,4)$ e $(3,18\cdot 5,05)+(3,18\cdot 11,4)$.
+    \end{enumerate}
+\end{example}
+\begin{solution}\hfill
     \begin{enumerate}
         \item $(11,4+3,18)+5,05$ e $11,4+(3,18+5,05)$.
         	\begin{itemize}
@@ -818,96 +873,16 @@ Considere uma máquina qualquer e uma série de operações aritméticas. Pelo f
         		\item $(3,18\cdot 5,05)+(3,18\cdot 11,4)=16,059+36,252=16,1+36,3=52,4$.
         	\end{itemize}
     \end{enumerate}
-\end{example}
+\end{solution}
 
-\begin{example}
-    Utilizando o mesmo sistema do exemplo anterior, somar $\frac{1}{3}$ dez vezes consecutivas, usando arredondamento.
-    
-    \todo{Resolver exemplo}
-\end{example}
-
-\begin{example}
-	Ainda com o sistema $\beta=10$ e $t=3$, calcular o valor do polinômio $p(x)=x^3-6x^2+4x-0,1$ no ponto $5,27$ utilizando arredondamento e comparar com o valor exato.
-	
-	\todo{Resolver exemplo}
-\end{example}
-
-\begin{example}
-	Calcule o erro absoluto e relativo para os resultados do exemplo anterior.
-	
-	\todo{Resolver exemplo}
-\end{example}
-
-\section{Exercícios}
+\subsection{Exercícios}
 
 \begin{enumerate}
-    \item Converta os números a seguir na base binária para a decimal.
-        \begin{enumerate}
-            \item $(110101011)_2$.
-            \item $(10,11)_2$.
-            \item $(0,011)_2$.
-            \item $(1010,101)_2$.
-            \item $(1,1)_2$.
-        \end{enumerate}
-
-    \item Converta os números a seguir na base decimal para a binária.
-        \begin{enumerate}
-            \item $(37)_{10}$.
-            \item $(2345)_{10}$.
-            \item $(11,25)_{10}$.
-            \item $(0,85)_{10}$.
-            \item $(0,1217)_{10}$.
-        \end{enumerate}
-
-    \item Represente os números decimais a seguir num sistema de aritmética de ponto flutuante de 3 dígitos, base decimal e expoente no intervalo $[-3, 3]$.
-        \begin{enumerate}
-            \item $153$
-            \item $-4,25$
-            \item $0,71$.
-            \item $0,000005$.
-            \item $6913,4$.
-        \end{enumerate}
-
-    \item Quantos e quais números podem ser representados no sistema $F(2, 4, -1, 1)$?
-
-    \item Considere uma máquina digital na base binária que utiliza 16 bits da seguinte maneira: 1 bit para representar o sinal da mantissa, 10 bits para representar a mantissa, 1 bit para representar o sinal do expoente e 4 bits para representar o expoente.
-        \begin{enumerate}
-            \item Qual é o maior número armazenado por essa máquina? Converta o resultado para decimal.
-            \item Qual é o número positivo mais próximo de zero armazenado por essa máquina?
-        \end{enumerate}
-
-    \item Considere o sistema $F(10, 2, -4, 4)$. Represente os seguintes números decimais nesse sistema utilizando truncamento e depois arredondamento.
-        \begin{enumerate}
-            \item $758$.
-            \item $-3946$.
-            \item $0,0000071$.
-            \item $-98713,45$.
-            \item $0,000655$.
-        \end{enumerate}
-
-    \item Utilizando um sistema de aritmética de ponto flutuante de 4 dígitos e base decimal, some $1/6$ dez vezes consecutivas, usando arredondamento.
-
-    \item Calcule o valor do polinômio $2,75x^3-2,95x^2+3,16x-4,67$ para $x=1,07$, usando aritmética de ponto flutuante de 3 dígitos e arredondamento. Calcule o erro absoluto e relativo.
-
-    \item Resolva o exercício anterior usando o polinômio na seguinte forma: $((2,75x-2,95)x+3,16)x-4,67$ e compare os resultados.
-
-    \item Faça as seguintes operações, trabalhando em aritmética de ponto flutuante de 3 dígitos, base decimal e assumindo arredondamento no corte dos dígitos. Calcule os erros absolutos e relativos. Para o valor exato utilize o resultado da calculadora (fx-82MS) no formato de exibição \textbf{Norm 2}.
-        \begin{enumerate}
-            \item $72 + 0,654$.
-            \item $159-0,357$.
-            \item $(71-0,446)-19$.
-            \item $(71-19)-0,446$.
-            \item $9/2-9/7$.
-        \end{enumerate}
-
-    \item Seja um sistema de aritmética de ponto flutuante de 4 dígitos e base 10. Dados os números $x=0.7327\cdot 10^1$, $y=0.5421\cdot 10^{-3}$ e $z=0.5852\cdot 10^4$, efetue as operações a seguir assumindo truncamento e obtenha o erro absoluto e relativo.
-        \begin{enumerate}
-            \item $x+y+z$.
-            \item $(x+y)-z$.
-            \item $x+(y-z)$.
-            \item $(x/z)+(y/z)$.
-            \item $(x+y)/z$.
-        \end{enumerate}
+	\item Utilizando o mesmo sistema do Exemplo \ref{exemplo:ex_anterior}, somar $\frac{1}{3}$ dez vezes consecutivas, usando arredondamento.
+	
+	\item Ainda com o sistema $\beta=10$ e $t=3$, calcular o valor do polinômio $p(x)=x^3-6x^2+4x-0,1$ no ponto $5,27$ utilizando arredondamento e comparar com o valor exato.
+	
+	\item Calcule o erro absoluto e relativo para os resultados do exercício anterior.
 \end{enumerate}
 
 \chapter{Série de Taylor e Maclaurim}
@@ -941,7 +916,8 @@ $$
 
 \begin{example}
     Encontre a série de Taylor de $f(x)=e^x$ em torno do ponto 2.
-
+\end{example}
+\begin{solution}
     É evidente que $f'(x)=e^x$ e, ainda, $f'(x)=f''(x)=f'''(x)=\cdots=e^x$ e, como $f(2)=e^2$, $f'(2)=f''(2)=f'''(2)=\cdots=e^2$. Tem-se, assim
     $$
     f(x)=e^x=
@@ -953,11 +929,13 @@ $$
     = \sum_{n=0}^{\infty} \frac{e^2}{n!}(x-2)^n
     \text{.}
     $$
-\end{example}
+\end{solution}
 
 \begin{example}
     Determine a série de Maclaurim para $e^x$.
+\end{example}
 
+\begin{solution}
     É evidente que, como $f(x)=e^x$, $f'(x)=f''(x)=f'''(x)=\cdots=e^x$ e, ainda, que $f(0)=e^0=1$, donde $f'(0)=f''(0)=f'''(0)=\cdots=1$. Assim,
     $$
         f(x)=e^x=
@@ -980,11 +958,14 @@ $$
         e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}
         \text{.}
     $$
-\end{example}
+\end{solution}
 
 \begin{example}
     Utilizando as séries de Taylor e Maclaurim de $e^x$, calcule $e^x$ para $x=3$, $x=2,1$, $x=1$, $x=0,1$ e $x=-1$, usando os cinco primeiros termos dessas séries.
+\end{example}
 
+\begin{solution}
+	Realizando os cálculos, chega-se a seguinte tabela:\\
 	\begin{center}
     	\begin{tabular}{|c|c|c|c|c|c|}
 	    	\hline
@@ -998,11 +979,13 @@ $$
     	    \hline
 	    \end{tabular}
 	\end{center}
-\end{example}
+\end{solution}
 
 \begin{example}
     Encontre a série de Taylor para a função $f(x)=sen(x)$ em torno do ponto $a$.
+\end{example}
 
+\begin{solution}
     Utilizando a série
     $$
         f(x)=\sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n
@@ -1019,11 +1002,12 @@ $$
             \cdots
         \text{.}
     $$
-\end{example}
+\end{solution}
 
 \begin{example}
     Determine a série de Maclaurim para $f(x)=sen(x)$.
-
+\end{example}
+\begin{solution}
     Utilizando a série
     $$
         f(x)=\sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}x^n
@@ -1045,23 +1029,13 @@ $$
         \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
         \text{.}
     $$
-\end{example}
+\end{solution}
 
-\begin{example}
-    Utilizando a série de Maclaurim de $sen(x)$, calcule $sen(x)$ para $x=\frac{\pi}{3}$, $\frac{\pi}{4}$ e $\frac{\pi}{6}$, usando os 4 primeiros termos dessa série.
+\section{Exercícios}
 
-    \begin{center}
-    	\begin{tabular}{|c|c|c|c|}
-	    	\hline
-        	 & $\frac{\pi}{3}$ & $\frac{\pi}{4}$ & $\frac{\pi}{6}$ \\
-    	    \hline
-	        $sen(x)$     & 0,866025 & 0,7071068 & 0,5 \\
-        	\hline
-	        Maclaurim    & 0,866021 & 0,7071065 & 0,499999992 \\
-    	    \hline
-	    \end{tabular}
-	\end{center}
-\end{example}
+\begin{enumerate}
+    \item Utilizando a série de Maclaurim de $sen(x)$, calcule $sen(x)$ para $x=\frac{\pi}{3}$, $\frac{\pi}{4}$ e $\frac{\pi}{6}$, usando os 4 primeiros termos dessa série.
+\end{enumerate}
 
 \chapter{Sistemas Lineares}
 
@@ -1114,6 +1088,8 @@ $$
 Denominamos $x*$ o vetor solução do sistema linear $Ax=b$.
 
 Os sistemas lineares podem ser classificados de acordo com a quantidade de soluções que possui (Ver Figura \ref{fig:classificacao_sistemas_lineares}).
+
+\newpage
 
 \begin{figure}[h]
 	\centering
@@ -1203,12 +1179,11 @@ onde $i=n-1,\dots,1$.
 
 \begin{remark}
     Se a matriz $A=(a_{ij})$ é tal que $a_{ij}=0$ para $j>i$, $i,j=1,2,\dots,n$ então tem-se um sistema triangular inferior.
-    
-    \todo{escrever as soluções para esse tipo}
 \end{remark}
 
-\begin{example}
-	Determine a solução do sistema a seguir
+\subsection{Exercícios}
+\begin{enumerate}
+	\item Determine a solução do sistema a seguir
 	$$
     	\begin{cases}[r]
         	3x_1 + 4x_2 + 5x_3 + x_4 & = 10\\
@@ -1218,8 +1193,7 @@ onde $i=n-1,\dots,1$.
 	    \end{cases}
     	\text{.}
 	$$
-	\todo{Resolver o sistema}
-\end{example}
+\end{enumerate}
 
 \section{Transformações Elementares}
 
@@ -1354,7 +1328,9 @@ Consiste em transformar o sistema original em um sistema diagonal equivalente.
         \end{bmatrix}
         \text{.}
     $$
+\end{example}
 
+\begin{solution}\hfill
     \begin{itemize}
         \item \textbf{Primeira etapa: } transformar o sistema original em um sistema equivalente na forma triangular superior (Gauss Simples).
 
@@ -1454,7 +1430,7 @@ Consiste em transformar o sistema original em um sistema diagonal equivalente.
         \end{bmatrix}
         \text{.}
     $$
-\end{example}
+\end{solution}
 
 \subsection{Exercícios}
 
@@ -1720,7 +1696,6 @@ A solução ótima do problema deverá estar sobre um dos vértices da região v
 
 	\begin{figure}[h]
 		\centering
-		\caption{Gráfico do Exemplo \ref{example:prog_lin:papelAB}}
 		\resizebox{0.7\textwidth}{!}{
 			\begin{tikzpicture}
 				\tkzInit[xmin=-1, xmax=9, ymin=-1, ymax=9]
@@ -1758,11 +1733,9 @@ A solução ótima do problema deverá estar sobre um dos vértices da região v
 				\node at (2, 3) {$\text{Região Viável}$};
 			\end{tikzpicture}
 		}
-		\fonte{Elaborado pelo autor, 2019.}
-		\label{fig:regiao_viavel_grafico}
 	\end{figure}
 	
-	Os vértices da região viável, conforme a Figura \ref{fig:regiao_viavel_grafico}, são:
+	Os vértices da região viável, conforme a figura acima são:
 	\begin{itemize}
 	    \item $(0, 0)$: $2x_1+5x_2=2\cdot 0+5\cdot 0=0\Longrightarrow$ lucro de R\$ 0,00.
 	    \item $(4, 0)$: $2\cdot 4 + 5\cdot 0 = 8 \Longrightarrow$ lucro de R\$ 8,00.
@@ -2087,6 +2060,202 @@ ou na forma tabular:
 	    \item resolva utilizando o método simplex tabular.
 	\end{enumerate}
 \end{enumerate}
+
+\chapter{Listas de Exercícios}
+
+\section{Primeira Lista de Exercícios}
+
+\begin{enumerate}
+    \item Cite as fases e os principais erros na resolução de um problema. Defina as fases.
+    
+    \item Considere os seguintes valores $x_1=0,00005183$ e $x_2=9876543210$. Utilizando uma calculadora científica (tipo Casio fx-82MS) no formato de exibição \textbf{Norm1} calcule as seguintes operações: $(x_1+x_2)-x_2$ e $x_1+(x_2-x_2)$. Repita os cálculos usando \textbf{Norm 2}. Compare os resultados.
+
+    \item Converta os números a seguir na base binária para a decimal.
+        \begin{enumerate}
+            \item $(110101011)_2$.
+            \item $(10,11)_2$.
+            \item $(0,011)_2$.
+            \item $(1010,101)_2$.
+            \item $(1,1)_2$.
+        \end{enumerate}
+
+    \item Converta os números a seguir na base decimal para a binária.
+        \begin{enumerate}
+            \item $(37)_{10}$.
+            \item $(2345)_{10}$.
+            \item $(11,25)_{10}$.
+            \item $(0,85)_{10}$.
+            \item $(0,1217)_{10}$.
+        \end{enumerate}
+
+    \item Represente os números decimais a seguir num sistema de aritmética de ponto flutuante de 3 dígitos, base decimal e expoente no intervalo $[-3, 3]$.
+        \begin{enumerate}
+            \item $153$
+            \item $-4,25$
+            \item $0,71$.
+            \item $0,000005$.
+            \item $6913,4$.
+        \end{enumerate}
+
+    \item Quantos e quais números podem ser representados no sistema $F(2, 4, -1, 1)$?
+
+    \item Considere uma máquina digital na base binária que utiliza 16 bits da seguinte maneira: 1 bit para representar o sinal da mantissa, 10 bits para representar a mantissa, 1 bit para representar o sinal do expoente e 4 bits para representar o expoente.
+        \begin{enumerate}
+            \item Qual é o maior número armazenado por essa máquina? Converta o resultado para decimal.
+            \item Qual é o número positivo mais próximo de zero armazenado por essa máquina?
+        \end{enumerate}
+
+    \item Considere o sistema $F(10, 2, -4, 4)$. Represente os seguintes números decimais nesse sistema utilizando truncamento e depois arredondamento.
+        \begin{enumerate}
+            \item $758$.
+            \item $-3946$.
+            \item $0,0000071$.
+            \item $-98713,45$.
+            \item $0,000655$.
+        \end{enumerate}
+
+    \item Utilizando um sistema de aritmética de ponto flutuante de 4 dígitos e base decimal, some $1/6$ dez vezes consecutivas, usando arredondamento.
+
+    \item Calcule o valor do polinômio $2,75x^3-2,95x^2+3,16x-4,67$ para $x=1,07$, usando aritmética de ponto flutuante de 3 dígitos e arredondamento. Calcule o erro absoluto e relativo.
+
+    \item Resolva o exercício anterior usando o polinômio na seguinte forma: $((2,75x-2,95)x+3,16)x-4,67$ e compare os resultados.
+
+    \item Faça as seguintes operações, trabalhando em aritmética de ponto flutuante de 3 dígitos, base decimal e assumindo arredondamento no corte dos dígitos. Calcule os erros absolutos e relativos. Para o valor exato utilize o resultado da calculadora (fx-82MS) no formato de exibição \textbf{Norm 2}.
+        \begin{enumerate}
+            \item $72 + 0,654$.
+            \item $159-0,357$.
+            \item $(71-0,446)-19$.
+            \item $(71-19)-0,446$.
+            \item $9/2-9/7$.
+        \end{enumerate}
+
+    \item Seja um sistema de aritmética de ponto flutuante de 4 dígitos e base 10. Dados os números $x=0.7327\cdot 10^1$, $y=0.5421\cdot 10^{-3}$ e $z=0.5852\cdot 10^4$, efetue as operações a seguir assumindo truncamento e obtenha o erro absoluto e relativo.
+        \begin{enumerate}
+            \item $x+y+z$.
+            \item $(x+y)-z$.
+            \item $x+(y-z)$.
+            \item $(x/z)+(y/z)$.
+            \item $(x+y)/z$.
+        \end{enumerate}
+\end{enumerate}
+
+\section{Segunda Lista de Exercícios}
+
+\begin{enumerate}
+    \item Dado um sistema linear triangular inferior de ordem $n$ encontre algebricamente a solução desse sistema.
+
+    \item Resolva os seguintes sistemas pelo método de Gauss.
+    \begin{enumerate}
+        \item $$
+                \begin{cases}
+                    x_1 + x_2 + x_3 = 1\\
+                    2x_1 + 3x_2 + 2x_3 = 2\\
+                    3x_1 - 3x_2 + 4x_3 = 3
+                \end{cases}
+              $$
+
+        \item $$
+                \begin{cases}
+                    2x_1 + 3x_2 - x_3 = 5\\
+                    4x_1 + 4x_2 - 3x_3 = 3\\
+                    x_1 - x_2 + x_3 = 2
+                \end{cases}
+              $$
+    \end{enumerate}
+
+    \item Resolva os seguintes sistemas pelo método de Gauss-Jordan.
+    \begin{enumerate}
+        \item $$
+                \begin{cases}
+                    x_1 + x_2 - 3x_3 = 4\\
+                    -2x_1 + 3x_2 + x_3 = 2\\
+                    x_1 + 2x_2 + x_3 = 1
+                \end{cases}
+              $$
+
+        \item $$
+                \begin{cases}
+                    x_1 + x_2 + 2x_3 = 4\\
+                    2x_1 - x_2 - x_3 = 2\\
+                    x_1 - x_2 - x_3 = 1
+                \end{cases}
+              $$
+    \end{enumerate}
+
+    \item Resolva o sistema a seguir pelo método de Jacobi, utilizando como critério de parada o erro relativo com $\varepsilon=0,2\times 10^{-1}$.
+    $$
+        \begin{cases}
+            10x_1 + x_2 - x_3 = 10\\
+            x_1 + 10x_2 + x_3 = 12\\
+            2x_1 -x_2 + 10x_3 = 11
+        \end{cases}
+    $$
+
+    \item Uma firma possui três tipos de máquinas, A, B e C, que podem produzir quatro produtos 1, 2, 3 e 4. Cada um dos produtos tem que passar por alguma operação em cada um dos três tipos de máquinas (tornear, perfurar e laminar). A tabela a seguir apresenta os tempos necessários de cada máquina para fazer a operação em cada produto, os lucros resultantes, bem como a disponibilidade semanal de tempo para cada máquina (Citado em Hadley, 1982).
+    
+    \begin{table}[h]
+    \tiny
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{cccccc}
+	\hline
+	\multirow{2}{*}{Tipo de máquina} & \multicolumn{4}{c}{Produtos} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Tempo total utilizado\\ por semana\end{tabular}} \\ \cline{2-5}
+	                                 & 1     & 2     & 3     & 4    &                                                                                             \\ \hline
+	A                                & 1,5   & 1,0   & 2,4   & 1,0  & 2.000                                                                                       \\
+	B                                & 1,0   & 5,0   & 1,0   & 3,5  & 8.000                                                                                       \\
+	C                                & 1,5   & 3,0   & 3,5   & 1,0  & 5.000                                                                                       \\ \hline
+	Lucro (R\$)                      & 5,24  & 7,30  & 8,54  & 4,18 &                                                                                             \\ \hline
+	\end{tabular}%
+	}
+	\end{table}
+    
+    Seja $x_j$ o número de unidades do produto $j$ produzidas por semana e que se queira maximizar o lucro dessa firma, determine:
+	\begin{enumerate}
+	    \item as variáveis de decisão;
+	    \item a função objetivo;
+	    \item as restrições do problema;
+	    \item o modelo matemático;
+	\end{enumerate}
+	
+	\item Obtenha a solução ótima para os problemas de programação linear a seguir utilizando o método gráfico.
+	\begin{enumerate}
+	    \item $\max \{z=5x_1+2x_2\}$\\
+	    sujeito a:\\
+	    $x_1\leqslant 3$\\
+	    $x_2\leqslant 4$\\
+	    $x_1 + 2x_2\leqslant 9$\\
+	    $x_1, x_2 \geqslant 0$
+	    
+	    \item $\max\{z=4x_1+8x_2\}$\\
+		sujeito a:
+		$3x_1+2x_2\leqslant 18$\\
+		$x_1+x_2\leqslant 5$\\
+		$x_1\leqslant 4$\\
+		$x_1, x_2 \geqslant 0$
+	\end{enumerate}
+	
+	\item Resolva pelo método simplex tabular os seguintes problemas de programação linear.
+	\begin{enumerate}
+	    \item $\max\{z=2x_1+6x_2\}$\\
+	    sujeito a:\\
+	    $4x_1+3x_2\leqslant 12$\\
+	    $2x_1+x_2\leqslant 8$\\
+	    $x_1, x_2\geqslant 0$
+	
+	    \item $\max\{z=4x_1+3x_2\}$\\
+	    sujeito a:\\
+	    $x_1+3x_2\leqslant 7$\\
+	    $2x_1+2x_2\leqslant 8$\\
+	    $x_1+x_2\leqslant 3$\\
+	    $x_2\leqslant 2$\\
+	    $x_1, x_2 \geqslant 0$
+	\end{enumerate}
+	
+	\item O Governo Federal colocou 20 ha de terras desmatadas à disposição de produtores locais. Essa área será utilizada para plantio de soja e algodão, estima-se que há 1.200 homens-horas disponíveis durante o período de semadura e, que são necessários 20 homens-horas por hectare de soja e 120 homens-horas por hectare de algodão. Oferece-se ainda uma linha de máxima de crédito de R\$ 6.000,00, dividida da seguinte forma: R\$ 600,00 por hectare de soja e R\$ 200,00 por hectare de algodão. Como organizar essa área de plantio para que se tenha lucro máximo, sabendo-se que as margens de lucro esperadas são de R\$ 50,00 por hectare de soja e R\$ 25,00 por hectare de algodão?
+
+	\item Um pequeno entregador pode transportar madeira ou frutas em seu carrinho de mão, mas cobra R\$ 2,00 para cada fardo de madeira e R\$ 3,00 por saco de frutas. Os fardos pesam 1 kg e ocupam $2 dm^3$ de espaço. Os sacos de fruta pesam 2 kg e ocupam $3 dm^3$ de espaço. O carrinho tem capacidade de transportar 10 kg e $16 dm^3$ e o entregador pode levar quantos sacos e quantos fardos desejar. Determine como o entregador deve encher o seu carrinho para ganhar o máximo possível.
+\end{enumerate}
+
 
 %\begin{apendicesenv}
 %	\partapendices
