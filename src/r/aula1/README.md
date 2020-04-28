@@ -1,0 +1,3 @@
+# Sobre
+
+Os cálculos apresentados nos quatro exemplos construidos em **R** na primeira aula é, além de introduzir os alunos ao úniverso do **R** explicando as operações aritméticas, atribuição de valores para variáveis, mostrar que, a depender do computador ou calculadora, principalmente dos critérios de arredondamento e capacidade de armazenamento cálculos que, analiticamente devem ser iguais, apresentarão resultados diferentes.
